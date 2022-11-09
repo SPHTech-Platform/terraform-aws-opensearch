@@ -1,8 +1,3 @@
-resource "aws_iam_service_linked_role" "opensearch" {
-  count            = var.create_service_role ? 1 : 0
-  aws_service_name = "opensearchservice.amazonaws.com"
-}
-
 resource "aws_opensearch_domain" "this" {
   domain_name     = var.cluster_name
   engine_version  = var.engine_version
@@ -73,10 +68,13 @@ resource "aws_opensearch_domain" "this" {
     throughput  = var.ebs_volume_type == "gp3" ? var.ebs_gp3_throughput : null
   }
 
-  log_publishing_options {
-    enabled                  = var.log_publishing_enabled
-    log_type                 = var.log_publishing_enabled ? var.log_type : null
-    cloudwatch_log_group_arn = var.log_publishing_enabled ? var.cloudwatch_log_group_arn : null
+  dynamic "log_publishing_options" {
+    for_each = merge(local.log_publishing_options_default, var.log_publishing_options)
+    content {
+      log_type                 = upper(log_publishing_options.key)
+      enabled                  = log_publishing_options.value.enabled
+      cloudwatch_log_group_arn = try(log_publishing_options.value.cloudwatch_log_group_arn, "") != "" ? log_publishing_options.value.cloudwatch_log_group_arn : aws_cloudwatch_log_group.es_cloudwatch_log_group[log_publishing_options.key].arn
+    }
   }
 
   tags = var.tags

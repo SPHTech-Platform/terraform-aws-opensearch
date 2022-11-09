@@ -127,9 +127,9 @@ variable "availability_zones" {
 }
 
 variable "encrypt_at_rest_enabled" {
-  description = " Whether to enable encryption at rest. If the encrypt_at_rest block is not provided then this defaults to false"
+  description = "Enable encrypt at rest."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "encrypt_kms_key_id" {
@@ -139,9 +139,9 @@ variable "encrypt_kms_key_id" {
 }
 
 variable "node_to_node_encryption_enabled" {
-  description = "Whether to enable node-to-node encryption. If the node_to_node_encryption block is not provided then this defaults to false"
+  description = "Enable node-to-node encryption."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "tags" {

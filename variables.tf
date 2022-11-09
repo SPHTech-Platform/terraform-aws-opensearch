@@ -20,6 +20,13 @@ variable "access_policies" {
   default     = ""
 }
 
+# once proper authentication added, this will be removed
+variable "whitelist_ips" {
+  description = "Whitelisted client ip address to access."
+  type        = list(string)
+  default     = []
+}
+
 variable "cluster_version" {
   description = "The version of OpenSearch to deploy."
   type        = string

@@ -1,7 +1,7 @@
 resource "aws_opensearch_domain" "this" {
   domain_name     = var.cluster_name
   engine_version  = var.engine_version
-  access_policies = var.access_policies
+  access_policies = data.aws_iam_policy_document.combined.json
 
   cluster_config {
     dedicated_master_enabled = var.master_instance_enabled

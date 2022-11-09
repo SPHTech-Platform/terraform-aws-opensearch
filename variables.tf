@@ -288,10 +288,12 @@ variable "saml_master_user_name" {
 
 variable "log_publishing_options" {
   description = "Configuration block for publishing slow and application logs to CloudWatch Logs."
+  # key is log_type, valid values: index_slow_logs, search_slow_logs, es_application_logs, audit_logs
   type = map(object({
     enabled                  = optional(bool, true)
     cloudwatch_log_group_arn = optional(string, "")
   }))
+  default = {}
 }
 
 

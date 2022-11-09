@@ -135,7 +135,7 @@ variable "encrypt_at_rest_enabled" {
 variable "encrypt_kms_key_id" {
   description = "The KMS key ID to encrypt the OpenSearch cluster with. If not specified, then it defaults to using the AWS OpenSearch Service KMS key."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "node_to_node_encryption_enabled" {

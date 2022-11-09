@@ -57,7 +57,7 @@ resource "aws_opensearch_domain" "this" {
 
   encrypt_at_rest {
     enabled    = var.encrypt_at_rest_enabled
-    kms_key_id = var.encrypt_at_rest_enabled ? var.encrypt_kms_key_id : null
+    kms_key_id = var.encrypt_kms_key_id
   }
 
   ebs_options {

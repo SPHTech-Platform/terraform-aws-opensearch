@@ -29,6 +29,10 @@ resource "aws_opensearch_domain" "this" {
         availability_zone_count = zone_awareness_config.value
       }
     }
+
+    cold_storage_options {
+      enabled = var.cold_storage_enabled
+    }
   }
 
   vpc_options {

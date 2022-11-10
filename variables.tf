@@ -114,6 +114,12 @@ variable "warm_instance_count" {
   default     = 3
 }
 
+variable "cold_storage_enabled" {
+  description = "Enable cold storage. Master and ultrawarm nodes must be enabled for cold storage."
+  type        = bool
+  default     = false
+}
+
 variable "availability_zones" {
   description = "The number of availability zones for the OpenSearch cluster. Valid values: 1, 2 or 3."
   type        = number
@@ -179,7 +185,7 @@ variable "ebs_gp3_throughput" {
 variable "ebs_iops" {
   description = "Baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the GP3 and Provisioned IOPS EBS volume types"
   type        = number
-  default     = 10000
+  default     = 3000
 }
 
 variable "custom_endpoint_enabled" {

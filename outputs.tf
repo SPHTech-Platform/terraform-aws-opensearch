@@ -3,7 +3,7 @@ output "cluster_arn" {
   value       = aws_opensearch_domain.this.arn
 }
 
-output "cluster_name" {
+output "domain_name" {
   description = "Name of the OpenSearch Cluster"
   value       = aws_opensearch_domain.this.domain_name
 }

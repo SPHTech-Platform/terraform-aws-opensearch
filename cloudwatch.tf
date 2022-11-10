@@ -1,5 +1,5 @@
 locals {
-  log_prefix = "/aws/OpenSearchService/domains/${var.cluster_name}"
+  log_prefix = "/aws/OpenSearchService/domains/${var.domain_name}"
 }
 
 resource "aws_cloudwatch_log_group" "aos" {
@@ -29,5 +29,5 @@ data "aws_iam_policy_document" "aos_log_publishing" {
 
 resource "aws_cloudwatch_log_resource_policy" "aos_log_publishing" {
   policy_document = data.aws_iam_policy_document.aos_log_publishing.json
-  policy_name     = "opensearch-${var.cluster_name}-logs"
+  policy_name     = "opensearch-${var.domain_name}-logs"
 }

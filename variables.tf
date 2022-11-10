@@ -1,4 +1,4 @@
-variable "cluster_name" {
+variable "domain_name" {
   description = "The name of the OpenSearch cluster."
   type        = string
 }

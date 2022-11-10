@@ -20,7 +20,7 @@ resource "aws_cloudwatch_log_resource_policy" "opensearch" {
 module "opensearch" {
   source = "../"
 
-  cluster_name   = var.cluster_name
+  domain_name    = var.domain_name
   engine_version = var.engine_version
 
   create_service_role = false
@@ -46,6 +46,6 @@ module "opensearch" {
 
   tags = {
     Domain = "TestDomain"
-    Name   = var.cluster_name
+    Name   = var.domain_name
   }
 }

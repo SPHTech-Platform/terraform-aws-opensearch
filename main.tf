@@ -5,7 +5,7 @@ resource "aws_opensearch_domain" "this" {
     aws_cloudwatch_log_group.aos,
   ]
 
-  domain_name     = var.cluster_name
+  domain_name     = var.domain_name
   engine_version  = var.engine_version
   access_policies = data.aws_iam_policy_document.combined.json
 

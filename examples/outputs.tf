@@ -3,9 +3,9 @@ output "cluster_arn" {
   value       = module.opensearch.cluster_arn
 }
 
-output "cluster_name" {
+output "domain_name" {
   description = "Name of the OpenSearch Cluster"
-  value       = module.opensearch.cluster_name
+  value       = module.opensearch.domain_name
 }
 
 output "cluster_id" {

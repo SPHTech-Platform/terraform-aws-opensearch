@@ -1,9 +1,9 @@
-resource "aws_iam_service_linked_role" "opensearch" {
+resource "aws_iam_service_linked_role" "aos" {
   count            = var.create_service_role ? 1 : 0
   aws_service_name = "opensearchservice.amazonaws.com"
 }
 
-data "aws_iam_policy_document" "os_access_policy" {
+data "aws_iam_policy_document" "aos_access_policy" {
   statement {
     sid = "admin"
 
@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "os_access_policy" {
 
 data "aws_iam_policy_document" "combined" {
   source_policy_documents = [
-    data.aws_iam_policy_document.os_access_policy.json,
+    data.aws_iam_policy_document.aos_access_policy.json,
     var.access_policies,
   ]
 }

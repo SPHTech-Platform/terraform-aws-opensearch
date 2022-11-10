@@ -73,7 +73,7 @@ resource "aws_opensearch_domain" "this" {
     content {
       log_type                 = upper(log_publishing_options.key)
       enabled                  = log_publishing_options.value.enabled
-      cloudwatch_log_group_arn = try(log_publishing_options.value.cloudwatch_log_group_arn, "") != "" ? log_publishing_options.value.cloudwatch_log_group_arn : aws_cloudwatch_log_group.es_cloudwatch_log_group[log_publishing_options.key].arn
+      cloudwatch_log_group_arn = try(log_publishing_options.value.cloudwatch_log_group_arn, "") != "" ? log_publishing_options.value.cloudwatch_log_group_arn : aws_cloudwatch_log_group.aos_cloudwatch_log_group[log_publishing_options.key].arn
     }
   }
 

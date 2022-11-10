@@ -3,14 +3,14 @@ locals {
 }
 
 #checkov:skip=CKV_AWS_158:rely on aws default encryption
-resource "aws_cloudwatch_log_group" "es_cloudwatch_log_group" {
+resource "aws_cloudwatch_log_group" "aos_cloudwatch_log_group" {
   for_each = { for k, v in var.log_publishing_options : k => v if v.enabled }
 
   name              = "${local.log_prefix}/${each.key}"
   retention_in_days = 7
 }
 
-data "aws_iam_policy_document" "es_log_publishing" {
+data "aws_iam_policy_document" "aos_log_publishing" {
   statement {
     actions = [
       "logs:CreateLogStream",
@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "es_log_publishing" {
   }
 }
 
-resource "aws_cloudwatch_log_resource_policy" "es_log_publishing" {
-  policy_document = data.aws_iam_policy_document.es_log_publishing.json
+resource "aws_cloudwatch_log_resource_policy" "aos_log_publishing" {
+  policy_document = data.aws_iam_policy_document.aos_log_publishing.json
   policy_name     = "opensearch-${var.cluster_name}-logs"
 }

@@ -20,9 +20,8 @@ resource "aws_cloudwatch_log_resource_policy" "opensearch" {
 module "opensearch" {
   source = "../"
 
-  cluster_name    = var.cluster_name
-  engine_version  = var.engine_version
-  access_policies = data.aws_iam_policy_document.os_access_policy.json
+  cluster_name   = var.cluster_name
+  engine_version = var.engine_version
 
   create_service_role = false
 
@@ -44,10 +43,6 @@ module "opensearch" {
   node_to_node_encryption_enabled = true
   encrypt_at_rest_enabled         = true
   encrypt_kms_key_id              = aws_kms_key.objects.id
-
-  log_publishing_enabled   = true
-  log_type                 = "INDEX_SLOW_LOGS"
-  cloudwatch_log_group_arn = aws_cloudwatch_log_group.opensearch.arn
 
   tags = {
     Domain = "TestDomain"

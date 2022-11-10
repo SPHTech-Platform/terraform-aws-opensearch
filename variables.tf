@@ -27,12 +27,6 @@ variable "whitelist_ips" {
   default     = []
 }
 
-variable "cluster_version" {
-  description = "The version of OpenSearch to deploy."
-  type        = string
-  default     = "1.0"
-}
-
 variable "create_service_role" {
   description = "Indicates whether to create the service-linked role. See https://docs.aws.amazon.com/opensearch-service/latest/developerguide/slr.html"
   type        = bool
@@ -117,13 +111,13 @@ variable "warm_instance_type" {
 variable "warm_instance_count" {
   description = "The number of dedicated warm nodes in the cluster."
   type        = number
-  default     = 2
+  default     = 3
 }
 
 variable "availability_zones" {
   description = "The number of availability zones for the OpenSearch cluster. Valid values: 1, 2 or 3."
   type        = number
-  default     = 2
+  default     = 3
 }
 
 variable "encrypt_at_rest_enabled" {

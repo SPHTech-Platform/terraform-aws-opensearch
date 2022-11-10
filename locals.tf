@@ -1,7 +1,7 @@
 locals {
   log_publishing_options_default = {
     audit_logs = {
-      enabled = true
+      enabled = false
     }
     index_slow_logs = {
       enabled = true

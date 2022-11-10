@@ -75,7 +75,7 @@ resource "aws_opensearch_domain" "this" {
   }
 
   dynamic "log_publishing_options" {
-    for_each = merge(local.log_publishing_options_default, var.log_publishing_options)
+    for_each = local.log_publishing_options
     content {
       log_type                 = upper(log_publishing_options.key)
       enabled                  = log_publishing_options.value.enabled

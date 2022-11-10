@@ -4,7 +4,7 @@ locals {
 
 #checkov:skip=CKV_AWS_158:rely on aws default encryption
 resource "aws_cloudwatch_log_group" "aos" {
-  for_each = { for k, v in var.log_publishing_options : k => v if v.enabled }
+  for_each = { for k, v in local.log_publishing_options : k => v if v.enabled }
 
   name              = "${local.log_prefix}/${each.key}"
   retention_in_days = 7

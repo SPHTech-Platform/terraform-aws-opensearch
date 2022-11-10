@@ -1,4 +1,10 @@
 resource "aws_opensearch_domain" "this" {
+  # service linked role must exist and default cloudwatch log_group created.
+  depends_on = [
+    aws_iam_service_linked_role.aos,
+    aws_cloudwatch_log_group.aos,
+  ]
+
   domain_name     = var.cluster_name
   engine_version  = var.engine_version
   access_policies = data.aws_iam_policy_document.combined.json
@@ -73,17 +79,17 @@ resource "aws_opensearch_domain" "this" {
     content {
       log_type                 = upper(log_publishing_options.key)
       enabled                  = log_publishing_options.value.enabled
-      cloudwatch_log_group_arn = try(log_publishing_options.value.cloudwatch_log_group_arn, "") != "" ? log_publishing_options.value.cloudwatch_log_group_arn : aws_cloudwatch_log_group.aos_cloudwatch_log_group[log_publishing_options.key].arn
+      cloudwatch_log_group_arn = try(log_publishing_options.value.cloudwatch_log_group_arn, "") != "" ? log_publishing_options.value.cloudwatch_log_group_arn : aws_cloudwatch_log_group.aos[log_publishing_options.key].arn
     }
   }
 
   tags = var.tags
 
-  depends_on = [aws_iam_service_linked_role.aos]
 }
 
 resource "aws_opensearch_domain_saml_options" "this" {
-  count       = var.saml_enabled ? 1 : 0
+  count = var.saml_enabled ? 1 : 0
+
   domain_name = aws_opensearch_domain.this.domain_name
 
   saml_options {

@@ -79,7 +79,7 @@ resource "aws_opensearch_domain" "this" {
 
   tags = var.tags
 
-  depends_on = [aws_iam_service_linked_role.opensearch]
+  depends_on = [aws_iam_service_linked_role.aos]
 }
 
 resource "aws_opensearch_domain_saml_options" "this" {

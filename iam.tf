@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "aos_access_policy" {
 
   dynamic "statement" {
     for_each = length(var.subnet_ids) == 0 ? [1] : []
-    statement {
+    content {
       sid = "client"
 
       effect = "Allow"

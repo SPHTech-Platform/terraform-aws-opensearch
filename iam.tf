@@ -20,30 +20,27 @@ data "aws_iam_policy_document" "aos_access_policy" {
     resources = ["arn:aws:es:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:domain/${var.cluster_name}/*"]
   }
 
-  statement {
-    sid = "client"
+  dynamic "statement" {
+    for_each = length(var.subnet_ids) == 0 ? [1] : []
+    statement {
+      sid = "client"
 
-    effect = "Allow"
+      effect = "Allow"
 
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
+      principals {
+        type        = "*"
+        identifiers = ["*"]
+      }
 
-    actions = ["es:ESHttp*"]
+      actions = ["es:ESHttp*"]
 
-    resources = ["arn:aws:es:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:domain/${var.cluster_name}/*"]
+      resources = ["arn:aws:es:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:domain/${var.cluster_name}/*"]
 
-    dynamic "condition" {
-      for_each = var.subnet_ids
-      content {
-        condition {
-          test     = "IpAddress"
-          variable = "aws:SourceIp"
+      condition {
+        test     = "IpAddress"
+        variable = "aws:SourceIp"
 
-          values = distinct(compact(var.whitelist_ips))
-        }
-
+        values = distinct(compact(var.whitelist_ips))
       }
     }
   }

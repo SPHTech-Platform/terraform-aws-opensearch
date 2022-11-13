@@ -1,4 +1,4 @@
-output "doamin_arn" {
+output "domain_arn" {
   description = "ARN of the OpenSearch Cluster"
   value       = aws_opensearch_domain.this.arn
 }

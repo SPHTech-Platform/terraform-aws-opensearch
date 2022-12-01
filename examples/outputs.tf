@@ -1,6 +1,6 @@
-output "cluster_arn" {
+output "domain_arn" {
   description = "ARN of the OpenSearch Cluster"
-  value       = module.opensearch.cluster_arn
+  value       = module.opensearch.domain_arn
 }
 
 output "domain_name" {
@@ -8,14 +8,14 @@ output "domain_name" {
   value       = module.opensearch.domain_name
 }
 
-output "cluster_id" {
+output "domain_id" {
   description = "Unique identifier for the Cluster"
-  value       = module.opensearch.cluster_id
+  value       = module.opensearch.domain_id
 }
 
-output "cluster_endpoint" {
+output "domain_endpoint" {
   description = "Domain-specific endpoint used to submit index, search, and data upload requests"
-  value       = module.opensearch.cluster_endpoint
+  value       = module.opensearch.domain_endpoint
 }
 
 output "kibana_endpoint" {

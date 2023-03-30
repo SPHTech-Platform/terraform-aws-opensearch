@@ -7,7 +7,8 @@ resource "aws_opensearch_domain" "this" {
 
   domain_name     = var.domain_name
   engine_version  = var.engine_version
-  access_policies = data.aws_iam_policy_document.combined.json
+  access_policies = null
+  # access_policies = data.aws_iam_policy_document.combined.json
 
   cluster_config {
     dedicated_master_enabled = var.master_instance_enabled
@@ -89,6 +90,11 @@ resource "aws_opensearch_domain" "this" {
 
   tags = var.tags
 
+}
+
+resource "aws_opensearch_domain_policy" "this" {
+  domain_name     = aws_opensearch_domain.this.domain_name
+  access_policies = data.aws_iam_policy_document.combined.json
 }
 
 resource "aws_opensearch_domain_saml_options" "this" {

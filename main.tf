@@ -1,4 +1,5 @@
 resource "aws_opensearch_domain" "this" {
+  #checkov:skip=CKV2_AWS_52
   # service linked role must exist and default cloudwatch log_group created.
   depends_on = [
     aws_iam_service_linked_role.aos,

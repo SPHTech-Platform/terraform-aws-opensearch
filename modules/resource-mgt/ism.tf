@@ -1,5 +1,9 @@
+locals {
+  ism_policies = var.ism_policies
+}
+
 resource "elasticsearch_opensearch_ism_policy" "this" {
-  for_each = var.ism_policies
+  for_each = local.ism_policies
 
   policy_id = each.key
   body      = each.value

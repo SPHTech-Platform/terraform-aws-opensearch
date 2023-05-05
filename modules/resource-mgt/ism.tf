@@ -6,8 +6,12 @@ resource "elasticsearch_opensearch_ism_policy" "this" {
 }
 
 resource "elasticsearch_opensearch_ism_policy_mapping" "this" {
-  count = length(elasticsearch_opensearch_ism_policy.this)
+  for_each = nonsensitive(var.ism_policies)
 
-  policy_id = elasticsearch_opensearch_ism_policy.this[count.index].id
+  policy_id = each.key
   indexes   = var.ism_index_pattern
+
+  depends_on = [
+    elasticsearch_opensearch_ism_policy.this
+  ]
 }

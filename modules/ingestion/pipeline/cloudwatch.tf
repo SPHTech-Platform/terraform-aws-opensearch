@@ -3,7 +3,7 @@ resource "aws_cloudwatch_log_group" "this" {
   count = var.pipeline_enable_logging ? 1 : 0
 
   name              = local.pipeline_log_group
-  kms_key_id        = module.cloudwatch_kms_secret.key_arn
+  kms_key_id        = try(module.cloudwatch_kms_secret[0].key_arn, "")
   retention_in_days = var.pipeline_log_group_retention_days
 
   tags = var.tags

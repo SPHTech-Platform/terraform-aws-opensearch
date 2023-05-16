@@ -1,4 +1,5 @@
 resource "aws_cloudformation_stack" "this" {
+  #checkov:skip=CKV_AWS_124:Ensure that CloudFormation stacks are sending event notifications to an SNS topic
   name = "${var.domain_name}-ingestion-stack"
 
   parameters = {

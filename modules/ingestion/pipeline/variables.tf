@@ -5,7 +5,7 @@ variable "domain_name" {
 
 variable "stack_on_failure" {
   description = "Action to be taken if stack creation fails"
-  type        = bool
+  type        = string
   default     = "ROLLBACK"
 }
 

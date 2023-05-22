@@ -16,7 +16,7 @@ resource "aws_cloudformation_stack" "this" {
 
     Resources = {
       OpenSearchIngestionPipeline = {
-        Type = "AWS::OSIS::Pipeline",
+        Type = "AWS::OSIS::Pipeline"
 
         Properties = {
           PipelineName = local.pipeline_name
@@ -32,11 +32,18 @@ resource "aws_cloudformation_stack" "this" {
           MaxUnits = var.pipeline_max_units
 
           PipelineConfigurationBody = {
-            Value = {
-              "Ref" = "PipelineConfigurationBody"
-            }
+            "Ref" = "PipelineConfigurationBody"
           }
         }
+      }
+    }
+
+    Outputs = {
+      PipelineArn = {
+        "Ref" = "OpenSearchIngestionPipeline"
+      }
+      IngestEndpointUrls = {
+        "Ref" = "OpenSearchIngestionPipeline"
       }
     }
   })

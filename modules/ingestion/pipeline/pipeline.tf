@@ -5,10 +5,10 @@ resource "awscc_osis_pipeline" "this" {
   min_units = var.pipeline_min_units
   max_units = var.pipeline_max_units
 
-  log_publishing_options {
+  log_publishing_options = {
     is_logging_enabled         = var.pipeline_enable_logging
     cloudwatch_log_destination = local.pipeline_log_group
   }
 
-  tags = var.tags
+  tags = local.tags
 }

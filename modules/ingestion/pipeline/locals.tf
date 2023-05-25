@@ -6,5 +6,5 @@ locals {
 
   pipeline_log_group = "/aws/OpenSearchService/IngestionService/${local.pipeline_name}"
 
-  tags = [for k, v in var.tags: {k = v} ]
+  tags = [for k, v in var.tags : { k = v }]
 }

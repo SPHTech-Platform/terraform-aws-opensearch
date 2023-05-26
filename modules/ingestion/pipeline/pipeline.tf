@@ -2,6 +2,8 @@ resource "awscc_osis_pipeline" "this" {
   pipeline_name               = local.pipeline_name
   pipeline_configuration_body = var.pipeline_configuration_body
 
+  vpc_options = local.vpc_options
+
   min_units = var.pipeline_min_units
   max_units = var.pipeline_max_units
 

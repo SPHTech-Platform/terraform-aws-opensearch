@@ -3,12 +3,6 @@ variable "domain_name" {
   type        = string
 }
 
-variable "stack_on_failure" {
-  description = "Action to be taken if stack creation fails"
-  type        = string
-  default     = "ROLLBACK"
-}
-
 variable "pipeline_name" {
   description = "Name of the ingestion pipeline"
   type        = string
@@ -45,6 +39,28 @@ variable "pipeline_log_group_retention_days" {
   description = "Duration in days for cloudwatch log group retention"
   type        = number
   default     = 30
+}
+
+####################
+# VPC Configuration
+####################
+
+variable "vpc_pipeline" {
+  description = "Set to true if pipeline is configured as a VPC pipeline, else it will be a public one"
+  type        = bool
+  default     = false
+}
+
+variable "subnet_ids" {
+  description = "List of subnet IDs associated with the pipeline"
+  type        = list(string)
+  default     = []
+}
+
+variable "security_group_ids" {
+  description = "List of security groups associated with the pipeline"
+  type        = list(string)
+  default     = []
 }
 
 variable "tags" {

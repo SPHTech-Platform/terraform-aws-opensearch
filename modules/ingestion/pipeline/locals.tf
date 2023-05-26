@@ -6,7 +6,7 @@ locals {
 
   pipeline_log_group = "/aws/vendedlogs/${local.pipeline_name}"
 
-  default_tags = [for k, v in data.aws_default_tags.this.tags : map({ k = v })]
+  default_tags = [for k, v in data.aws_default_tags.this.tags : tomap({ k = v })]
   tags         = local.default_tags
   #tags         = concat([for k, v in var.tags : { k = v }], local.default_tags)
 }

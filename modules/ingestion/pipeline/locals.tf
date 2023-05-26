@@ -6,5 +6,6 @@ locals {
 
   pipeline_log_group = "/aws/vendedlogs/${local.pipeline_name}"
 
-  tags = [for k, v in merge(var.tags, tomap(data.aws_default_tags.this.tags)) : { k = v } if k == "map-migrated"]
+  default_tags = [for t in data.aws_default_tags.this.tags : { t.key = t.value }]
+  tags         = setunion([for k, v in var.tags : { k = v }], local.default_tags)
 }

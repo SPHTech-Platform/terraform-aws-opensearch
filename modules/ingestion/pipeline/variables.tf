@@ -41,28 +41,6 @@ variable "pipeline_log_group_retention_days" {
   default     = 30
 }
 
-####################
-# VPC Configuration
-####################
-
-variable "vpc_pipeline" {
-  description = "Set to true if pipeline is configured as a VPC pipeline, else it will be a public one"
-  type        = bool
-  default     = false
-}
-
-variable "subnet_ids" {
-  description = "List of subnet IDs associated with the pipeline"
-  type        = list(string)
-  default     = []
-}
-
-variable "security_group_ids" {
-  description = "List of security groups associated with the pipeline"
-  type        = list(string)
-  default     = []
-}
-
 variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)

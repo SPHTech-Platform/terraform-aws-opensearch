@@ -4,7 +4,7 @@ locals {
 
   pipeline_name = var.pipeline_name != null ? var.pipeline_name : "${var.domain_name}-ingest"
 
-  pipeline_log_group = "/aws/OpenSearchService/IngestionService/${local.pipeline_name}"
+  pipeline_log_group = "/aws/vendedlogs/${local.pipeline_name}"
 
   tags = [for k, v in var.tags : { k = v }]
 }

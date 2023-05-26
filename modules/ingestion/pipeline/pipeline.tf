@@ -12,5 +12,5 @@ resource "awscc_osis_pipeline" "this" {
     }
   }
 
-  tags = local.tags
+  tags = local.pipeline_tags
 }

@@ -4,13 +4,17 @@ variable "domain_endpoint" {
 }
 
 variable "ism_policies" {
-  description = "A map of all ISM policies to create. Value should be json encoded"
-  type        = map(string)
-  default     = {}
+  description = "A map of all ISM policies. Body should be json encoded"
+  type = map(object({
+    create            = bool
+    body              = optional(string)
+    ism_index_pattern = string
+  }))
+  default = {}
 }
 
-variable "ism_index_pattern" {
-  description = "Index pattern to apply ISM policies to"
-  type        = string
-  default     = null
+variable "ism_templates" {
+  description = "A map of ISM templates. Body should be json encoded"
+  type        = map(any)
+  default     = {}
 }

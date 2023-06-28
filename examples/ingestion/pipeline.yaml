@@ -9,7 +9,7 @@ example-pipeline:
         destination: "@timestamp"
   sink:
     - opensearch:
-        hosts: [${opensearch_host}]
+        hosts: ["${opensearch_host}"]
         index: "application_logs"
         aws:
           # IAM role that the pipeline assumes to access the domain sink

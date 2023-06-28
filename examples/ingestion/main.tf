@@ -16,7 +16,6 @@ module "ingestion_iam" {
 
   domain_name     = local.domain_name
   domain_arn      = "arn:aws:es:${local.region}:${local.account_id}:domain/${local.domain_name}"
-  domain_endpoint = "https://example_domain_endpoint"
 }
 
 module "ingestion_pipeline" {

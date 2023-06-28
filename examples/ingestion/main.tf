@@ -12,6 +12,7 @@ locals {
 }
 
 module "ingestion_iam" {
+  #checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
   source = "../..//modules/ingestion/iam"
 
   domain_name = local.domain_name
@@ -19,6 +20,7 @@ module "ingestion_iam" {
 }
 
 module "ingestion_pipeline" {
+  #checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
   source = "../..//modules/ingestion/pipeline"
 
   domain_name = local.domain_name

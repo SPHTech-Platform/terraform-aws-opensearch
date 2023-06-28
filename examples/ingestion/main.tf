@@ -14,8 +14,8 @@ locals {
 module "ingestion_iam" {
   source = "../..//modules/ingestion/iam"
 
-  domain_name     = local.domain_name
-  domain_arn      = "arn:aws:es:${local.region}:${local.account_id}:domain/${local.domain_name}"
+  domain_name = local.domain_name
+  domain_arn  = "arn:aws:es:${local.region}:${local.account_id}:domain/${local.domain_name}"
 }
 
 module "ingestion_pipeline" {

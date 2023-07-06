@@ -33,6 +33,4 @@ No modules.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | The ID of the index template |
+No outputs.

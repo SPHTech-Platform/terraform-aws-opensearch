@@ -26,7 +26,6 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_body"></a> [body](#input\_body) | The JSON body of the ISM policy | `string` | n/a | yes |
-| <a name="input_index_pattern"></a> [index\_pattern](#input\_index\_pattern) | Index pattern to update multiple indices at once | `string` | n/a | yes |
 | <a name="input_policy_id"></a> [policy\_id](#input\_policy\_id) | The ID of the ISM policy | `string` | n/a | yes |
 
 ## Outputs

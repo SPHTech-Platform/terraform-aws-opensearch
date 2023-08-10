@@ -353,5 +353,5 @@ variable "rollback_on_disable" {
 variable "maintenance_schedule" {
   description = "configuration for auto tune maintenance schedule"
   type        = map(any)
-  default     = null
+  default     = {}
 }

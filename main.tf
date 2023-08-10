@@ -94,7 +94,7 @@ resource "aws_opensearch_domain" "this" {
     desired_state       = var.auto_tune_desired_state
     rollback_on_disable = var.rollback_on_disable
     dynamic "maintenance_schedule" {
-      for_each = var.maintenance_schedule != null ? var.maintenance_schedule : {}
+      for_each = var.maintenance_schedule
       content {
         start_at = maintenance_schedule.start_at
         duration {

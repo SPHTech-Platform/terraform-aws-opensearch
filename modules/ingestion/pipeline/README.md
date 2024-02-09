@@ -3,15 +3,13 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.4 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.38 |
-| <a name="requirement_awscc"></a> [awscc](#requirement\_awscc) | >= 0.67 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.36 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.67.0 |
-| <a name="provider_awscc"></a> [awscc](#provider\_awscc) | 0.52.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.36.0 |
 
 ## Modules
 
@@ -26,7 +24,7 @@
 | [aws_cloudwatch_log_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_iam_policy.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role_policy_attachment.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
-| [awscc_osis_pipeline.this](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs/resources/osis_pipeline) | resource |
+| [aws_osis_pipeline.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/osis_pipeline) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_default_tags.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/default_tags) | data source |
 | [aws_iam_policy_document.cloudwatch_log_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -45,8 +43,8 @@
 | <a name="input_min_units"></a> [min\_units](#input\_min\_units) | The minimum pipeline capacity, in Ingestion Compute Units | `number` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Name of the ingestion pipeline | `string` | n/a | yes |
 | <a name="input_persistent_buffer_enabled"></a> [persistent\_buffer\_enabled](#input\_persistent\_buffer\_enabled) | Whether persistent buffering should be enabled | `bool` | `false` | no |
-| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | Security group IDs to attach to the pipeline | `list(string)` | `[]` | no |
-| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | Subnet IDs to deploy pipeline in. Only needed if pipeline is to be deployed in VPC mode | `list(string)` | `[]` | no |
+| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | Security group IDs to attach to the pipeline | `list(string)` | `null` | no |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | Subnet IDs to deploy pipeline in. Only needed if pipeline is to be deployed in VPC mode | `list(string)` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources | `map(string)` | `{}` | no |
 
 ## Outputs

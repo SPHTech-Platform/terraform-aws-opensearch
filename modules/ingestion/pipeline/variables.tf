@@ -32,13 +32,13 @@ variable "enable_logging" {
 variable "subnet_ids" {
   description = "Subnet IDs to deploy pipeline in. Only needed if pipeline is to be deployed in VPC mode"
   type        = list(string)
-  default     = null
+  default     = []
 }
 
 variable "security_group_ids" {
   description = "Security group IDs to attach to the pipeline"
   type        = list(string)
-  default     = null
+  default     = []
 }
 
 variable "persistent_buffer_enabled" {

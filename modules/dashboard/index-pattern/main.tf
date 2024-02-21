@@ -1,5 +1,5 @@
 locals {
-  id = coalesce(var.pattern_id, split(var.pattern, "-*")[0])
+  id = coalesce(var.pattern_id, split("-*", var.pattern)[0])
 }
 
 resource "opensearch_dashboard_object" "index_pattern" {

@@ -144,4 +144,9 @@ resource "aws_opensearch_vpc_endpoint" "this" {
     subnet_ids         = var.vpc_endpoint_subnet_ids
     security_group_ids = var.vpc_endpoint_security_group_ids
   }
+
+  tags = merge(
+    { Name : "${var.domain_name}-vpce" },
+    var.tags
+  )
 }

@@ -29,6 +29,12 @@ variable "enable_logging" {
   default     = true
 }
 
+variable "cloudwatch_kms_key_id" {
+  description = "(Optional) Use a custom KMS key ID to encrypt Cloudwatch logs. If not specified, then it defaults to using the AWS KMS key."
+  type        = string
+  default     = ""
+}
+
 variable "subnet_ids" {
   description = "Subnet IDs to deploy pipeline in. Only needed if pipeline is to be deployed in VPC mode"
   type        = list(string)

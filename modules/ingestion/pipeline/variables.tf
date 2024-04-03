@@ -30,9 +30,9 @@ variable "enable_logging" {
 }
 
 variable "cloudwatch_kms_key_id" {
-  description = "(Optional) Use a custom KMS key ID to encrypt Cloudwatch logs. If not specified, then it defaults to using the AWS KMS key."
+  description = "(Optional) KMS key ID for Cloudwatch logs"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "subnet_ids" {

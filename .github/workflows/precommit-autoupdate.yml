@@ -17,8 +17,7 @@ permissions:
 jobs:
   auto-update:
     runs-on:
-      - self-hosted
-      - platform-eng-ent
+      - ubuntu-latest
     steps:
       - uses: SPHTech-Platform/gha-pre-commit-autoupdate@testgh
         name: Update pre-commit config automatically

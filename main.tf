@@ -124,8 +124,8 @@ resource "aws_opensearch_domain" "this" {
         dynamic "window_start_time" {
           for_each = var.enable_off_peak_window_options ? [1] : []
           content {
-            hours   = lookup(var.off_peak_window_options, "hours")
-            minutes = lookup(var.off_peak_window_options, "minutes")
+            hours   = var.off_peak_window_options["hours"]
+            minutes = var.off_peak_window_options["minutes"]
           }
         }
       }

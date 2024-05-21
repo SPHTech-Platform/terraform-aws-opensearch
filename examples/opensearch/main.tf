@@ -21,6 +21,7 @@ resource "aws_cloudwatch_log_resource_policy" "opensearch" {
 }
 
 module "opensearch" {
+  #checkov:skip=CKV_AWS_248:Ensure that Elasticsearch is not using the default Security Group
   source = "../../"
 
   domain_name    = var.domain_name

@@ -1,5 +1,6 @@
 resource "aws_opensearch_domain" "this" {
   #checkov:skip=CKV2_AWS_52
+  #checkov:skip=CKV_AWS_248:Ensure that Elasticsearch is not using the default Security Group
   #checkov:skip=CKV_AWS_317:Ensure Elasticsearch Domain Audit Logging is enabled
   # service linked role must exist and default cloudwatch log_group created.
   depends_on = [

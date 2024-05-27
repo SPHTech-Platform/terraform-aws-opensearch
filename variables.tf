@@ -393,7 +393,15 @@ variable "log_publishing_options" {
     enabled                  = optional(bool, true)
     cloudwatch_log_group_arn = optional(string, "")
   }))
-  default = {}
+
+  default = {
+    audit_logs = {
+      enabled = false
+    }
+    index_slow_logs = {
+      enabled = true
+    }
+  }
 }
 
 variable "cloudwatch_log_group_retention_days" {

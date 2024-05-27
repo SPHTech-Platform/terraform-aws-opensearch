@@ -1,4 +1,6 @@
 locals {
+  minute = 60
+
   default_alarms = {
     # cluster status
     cluster_status_red = {

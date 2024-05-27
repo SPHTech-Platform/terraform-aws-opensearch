@@ -38,10 +38,19 @@ resource "aws_opensearch_domain" "this" {
     }
   }
 
+  cognito_options {
+    enabled          = var.enable_cognito
+    identity_pool_id = var.cognito_identity_pool_id
+    role_arn         = var.cognito_role_arn
+    user_pool_id     = var.cognito_user_id_pool
+  }
+
   vpc_options {
     subnet_ids         = var.subnet_ids
     security_group_ids = var.security_group_ids
   }
+
+  advanced_options = var.advanced_options
 
   advanced_security_options {
     enabled                        = var.advanced_security_options_enabled
@@ -91,7 +100,40 @@ resource "aws_opensearch_domain" "this" {
   }
 
   auto_tune_options {
-    desired_state = var.auto_tune_desired_state
+    desired_state       = var.auto_tune_desired_state
+    rollback_on_disable = var.rollback_on_disable
+    dynamic "maintenance_schedule" {
+      for_each = var.maintenance_schedule
+      content {
+        start_at = maintenance_schedule.start_at
+        duration {
+          value = maintenance_schedule.duration
+          unit  = "HOURS"
+        }
+        cron_expression_for_recurrence = maintenance_schedule.cron_expression_for_recurrence
+      }
+    }
+  }
+
+  off_peak_window_options {
+    enabled = var.enable_off_peak_window_options
+
+    dynamic "off_peak_window" {
+      for_each = var.enable_off_peak_window_options ? [1] : []
+      content {
+        dynamic "window_start_time" {
+          for_each = var.enable_off_peak_window_options ? [1] : []
+          content {
+            hours   = lookup(var.off_peak_window_options, "hours")
+            minutes = lookup(var.off_peak_window_options, "minutes")
+          }
+        }
+      }
+    }
+  }
+
+  software_update_options {
+    auto_software_update_enabled = var.auto_software_update_enabled
   }
 
   tags = var.tags
@@ -119,5 +161,16 @@ resource "aws_opensearch_domain_saml_options" "this" {
       entity_id        = var.saml_entity_id
       metadata_content = var.saml_metadata_content
     }
+  }
+}
+
+resource "aws_opensearch_vpc_endpoint" "this" {
+  count = var.create_vpc_endpoint ? 1 : 0
+
+  domain_arn = aws_opensearch_domain.this.arn
+
+  vpc_options {
+    subnet_ids         = var.vpc_endpoint_subnet_ids
+    security_group_ids = var.vpc_endpoint_security_group_ids
   }
 }

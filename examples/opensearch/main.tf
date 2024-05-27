@@ -1,4 +1,5 @@
 resource "aws_kms_key" "objects" {
+  #checkov:skip=CKV2_AWS_64:Ensure KMS key Policy is defined
   description             = "KMS key is used to encrypt node data"
   deletion_window_in_days = 7
   is_enabled              = true
@@ -20,7 +21,7 @@ resource "aws_cloudwatch_log_resource_policy" "opensearch" {
 }
 
 module "opensearch" {
-  source = "../"
+  source = "../../"
 
   domain_name    = var.domain_name
   engine_version = var.engine_version
@@ -39,6 +40,16 @@ module "opensearch" {
   ]
 
   security_group_ids = [
+    data.aws_cloudformation_export.app_sg_id.value,
+  ]
+
+  # VPC endpoint creation. Disabled by default
+  create_vpc_endpoint = true
+  vpc_endpoint_subnet_ids = [
+    data.aws_cloudformation_export.web_subnet_a.value,
+    data.aws_cloudformation_export.web_subnet_b.value,
+  ]
+  vpc_endpoint_security_group_ids = [
     data.aws_cloudformation_export.app_sg_id.value,
   ]
 

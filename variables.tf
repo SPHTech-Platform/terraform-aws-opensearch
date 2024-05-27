@@ -20,6 +20,12 @@ variable "access_policies" {
   default     = ""
 }
 
+variable "admin_identifiers" {
+  description = "Admin Identifiers to be allowed in the Access Policy of Opensearch Cluster"
+  type        = list(string)
+  default     = ["*"]
+}
+
 # once proper authentication added, this will be removed
 variable "whitelist_ips" {
   description = "Whitelisted client ip address to access."
@@ -47,6 +53,30 @@ variable "master_user_name" {
 
 variable "master_user_password" {
   description = "Main user's password, which is stored in the Amazon OpenSearch Service domain's internal database"
+  type        = string
+  default     = ""
+}
+
+variable "enable_cognito" {
+  description = "Whether Amazon Cognito authentication with Dashboard is enabled or not."
+  type        = bool
+  default     = false
+}
+
+variable "cognito_identity_pool_id" {
+  description = "ID of the Cognito Identity Pool to use."
+  type        = string
+  default     = ""
+}
+
+variable "cognito_role_arn" {
+  description = "ARN of the IAM role that has the AmazonOpenSearchServiceCognitoAccess policy attached."
+  type        = string
+  default     = ""
+}
+
+variable "cognito_user_id_pool" {
+  description = "ID of the Cognito User Pool to use."
   type        = string
   default     = ""
 }
@@ -80,7 +110,7 @@ variable "instance_type" {
   default     = "t3.small.search"
 
   validation {
-    condition     = can(regex("^[t3|m5|m6g|r5|r6g|r6gd|i3|c5|c6g]", var.instance_type))
+    condition     = can(regex("^[t3|m5|m6g|r5|r6g|r6gd|i3|c5|c6g|or1]", var.instance_type))
     error_message = "The EC2 instance_type must provide a SSD or NVMe-based local storage."
   }
 }
@@ -236,6 +266,45 @@ variable "internal_user_database_enabled" {
   default     = false
 }
 
+variable "create_vpc_endpoint" {
+  description = "Whether to create a VPC endpoint for the domain"
+  type        = bool
+  default     = false
+}
+
+variable "vpc_endpoint_subnet_ids" {
+  description = "Subnet IDs to use for VPC endpoint"
+  type        = list(string)
+  default     = []
+}
+
+variable "vpc_endpoint_security_group_ids" {
+  description = "Security group IDs to use for VPC endpoint"
+  type        = list(string)
+  default     = []
+}
+
+variable "auto_software_update_enabled" {
+  description = "Whether automatic service software updates are enabled for the domain"
+  type        = bool
+  default     = false
+}
+
+variable "enable_off_peak_window_options" {
+  description = "Enabled disabled toggle for off-peak update window"
+  type        = bool
+  default     = true
+}
+
+variable "off_peak_window_options" {
+  description = "Configuration for off peak window"
+  type        = map(any)
+  default = {
+    hours   = 14
+    minutes = 0
+  }
+}
+
 ##########
 ## SAML ##
 ##########
@@ -303,6 +372,11 @@ variable "log_publishing_options" {
   default = {}
 }
 
+variable "cloudwatch_log_group_retention_days" {
+  description = "Cloudwatch log group retention period in days"
+  type        = number
+  default     = 7
+}
 
 ############
 ## Alerts ##
@@ -342,4 +416,22 @@ variable "auto_tune_desired_state" {
   description = "The Auto-Tune desired state for the domain. Valid values: ENABLED or DISABLED"
   type        = string
   default     = "ENABLED"
+}
+
+variable "rollback_on_disable" {
+  description = "whether to roll back auto tune if auto tune is disabled"
+  type        = string
+  default     = "NO_ROLLBACK"
+}
+
+variable "maintenance_schedule" {
+  description = "configuration for auto tune maintenance schedule"
+  type        = map(any)
+  default     = {}
+}
+
+variable "advanced_options" {
+  description = "Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your OpenSearch domain on every apply."
+  type        = map(string)
+  default     = {}
 }

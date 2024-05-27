@@ -18,7 +18,17 @@ output "domain_endpoint" {
   value       = aws_opensearch_domain.this.endpoint
 }
 
-output "kibana_endpoint" {
-  description = "Domain-specific endpoint for kibana without https scheme."
-  value       = aws_opensearch_domain.this.kibana_endpoint
+output "vpc_endpoint_id" {
+  description = "The unique identifier of the endpoint"
+  value       = var.create_vpc_endpoint ? aws_opensearch_vpc_endpoint.this[0].id : null
+}
+
+output "vpc_endpoint_endpoint" {
+  description = "The connection endpoint ID for connecting to the domain"
+  value       = var.create_vpc_endpoint ? aws_opensearch_vpc_endpoint.this[0].endpoint : null
+}
+
+output "vpc_endpoint_dns_names" {
+  description = "VPC endpoint DNS names"
+  value       = var.create_vpc_endpoint ? [for entry in data.aws_vpc_endpoint.this[0].dns_entry : entry.dns_name] : []
 }

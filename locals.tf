@@ -1,5 +1,6 @@
 locals {
   minute = 60
+
   log_publishing_options_default = {
     audit_logs = {
       enabled = false

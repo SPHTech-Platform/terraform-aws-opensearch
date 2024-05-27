@@ -1,33 +1,5 @@
-# resource "aws_cloudwatch_metric_alarm" "red_cluster_status" {
-#   alarm_name        = "${aws_opensearch_domain.this.domain_name}-red-cluster-status"
-#   alarm_description = "At least one primary shard and its replicas are not allocated to a node"
-
-#   comparison_operator = "GreaterThanOrEqualToThreshold"
-#   evaluation_periods  = var.red_cluster_status_evaluation_periods
-
-#   metric_name = "ClusterStatus.red"
-#   namespace   = "AWS/ES"
-
-#   period    = var.red_cluster_status_period
-#   statistic = "Maximum"
-
-#   threshold = var.red_cluster_status_threshold
-
-#   alarm_actions = var.alarm_actions
-#   ok_actions    = var.ok_actions
-
-#   tags = var.tags
-
-#   dimensions = {
-#     Per-Domain = aws_opensearch_domain.this.domain_name
-#   }
-# }
-
-module "os_alarms" {
-  source  = "terraform-aws-modules/cloudwatch/aws//wrappers/metric-alarm"
-  version = "~> 4.3.0"
-
-  items = {
+locals {
+  default_alarms = {
     # cluster status
     cluster_status_red = {
       alarm_name        = "cluster_status_red"
@@ -107,6 +79,7 @@ module "os_alarms" {
         DomainName = aws_opensearch_domain.this.domain_name
       }
     }
+    # /cluster status
 
     # cpu utilization
     data_high_cpu_utilization = {
@@ -151,28 +124,27 @@ module "os_alarms" {
       alarm_actions = var.alarm_actions
     }
 
-    # warm_high_cpu_utilization = {
-    #   create            = var.warm_instance_count != null
-    #   alarm_name        = "warm_high_cpu_util"
-    #   alarm_description = "high cpu utilization on aos warm nodes"
+    warm_high_cpu_utilization = {
+      create            = var.warm_instance_count != null
+      alarm_name        = "warm_high_cpu_util"
+      alarm_description = "high cpu utilization on aos warm nodes"
 
-    #   comparison_operator = "GreaterThanOrEqualToThreshold"
-    #   evaluation_periods  = 3
-    #   threshold           = 80
-    #   period              = 15 * local.minute
-    #   unit                = "Percent"
+      comparison_operator = "GreaterThanOrEqualToThreshold"
+      evaluation_periods  = 3
+      threshold           = 80
+      period              = 15 * local.minute
+      unit                = "Percent"
 
-    #   namespace          = "ES/OpenSearchService"
-    #   metric_name        = "WarmCPUUtilization"
-    #   statistic          = "Maximum"
-    #   treat_missing_data = "notBreaching"
+      namespace          = "ES/OpenSearchService"
+      metric_name        = "WarmCPUUtilization"
+      statistic          = "Maximum"
+      treat_missing_data = "notBreaching"
 
-    #   dimensions = {
-    #     DomainName = aws_opensearch_domain.this.domain_name
-    #   }
-    #   alarm_actions = var.alarm_actions
-    # }
-
+      dimensions = {
+        DomainName = aws_opensearch_domain.this.domain_name
+      }
+      alarm_actions = var.alarm_actions
+    }
     # /cpuutilization
 
     # jvm pressure
@@ -259,7 +231,6 @@ module "os_alarms" {
       }
       alarm_actions = var.alarm_actions
     }
-
     # /jvmpressure
 
     # kms
@@ -306,7 +277,6 @@ module "os_alarms" {
     }
 
     # 5xx errors
-
     server_errors = {
       alarm_name        = "server_errors"
       alarm_description = "One or more data nodes might be overloaded, or requests are failing to complete within the idle timeout period"
@@ -328,7 +298,6 @@ module "os_alarms" {
     }
 
     # threadpool
-
     threadpool_high_write_avg = {
       alarm_name        = "high_threadpool_write_queue_avg"
       alarm_description = "the cluster is experiencing high indexing concurrency"
@@ -389,4 +358,13 @@ module "os_alarms" {
       alarm_actions = var.alarm_actions
     }
   }
+
+  alarms = { for k, v in local.default_alarms : k => merge(v, try(var.alarm_overrides[k], {})) if var.create_alarms && !contains(var.disabled_alarms, k) }
+}
+
+module "cloudwatch_alarms" {
+  source  = "terraform-aws-modules/cloudwatch/aws//wrappers/metric-alarm"
+  version = "~> 4.5.0"
+
+  items = local.alarms
 }

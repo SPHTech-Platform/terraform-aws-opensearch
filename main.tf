@@ -60,8 +60,8 @@ resource "aws_opensearch_domain" "this" {
 
     master_user_options {
       master_user_arn      = (!var.internal_user_database_enabled && var.master_user_arn != "") ? var.master_user_arn : null
-      master_user_name     = (var.internal_user_database_enabled && var.master_user_arn == "") ? var.master_user_name : null
-      master_user_password = (var.internal_user_database_enabled && var.master_user_arn == "") ? var.master_user_password : null
+      master_user_name     = (var.internal_user_database_enabled && var.master_user_name != "") ? var.master_user_name : null
+      master_user_password = (var.internal_user_database_enabled && var.master_user_password != "") ? var.master_user_password : null
     }
   }
 

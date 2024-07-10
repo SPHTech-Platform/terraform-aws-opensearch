@@ -13,7 +13,7 @@ variable "engine_version" {
 variable "instance_count" {
   description = "OpenSearch instance count"
   type        = number
-  default     = 2
+  default     = 3
 }
 
 variable "instance_type" {

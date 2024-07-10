@@ -13,7 +13,7 @@ variable "engine_version" {
 variable "instance_count" {
   description = "OpenSearch instance count"
   type        = number
-  default     = 3
+  default     = 2
 }
 
 variable "instance_type" {
@@ -32,12 +32,6 @@ variable "cf_export_web_subnet_b" {
   description = "cf_export_web_subnet_b"
   type        = string
   default     = "subnetIDWebB-ap-southeast-1"
-}
-
-variable "cf_export_web_subnet_c" {
-  description = "cf_export_web_subnet_c"
-  type        = string
-  default     = "subnetIDWebC-ap-southeast-1"
 }
 
 variable "cf_export_app_sg_id" {

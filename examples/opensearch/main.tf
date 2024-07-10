@@ -48,7 +48,6 @@ module "opensearch" {
   vpc_endpoint_subnet_ids = [
     data.aws_cloudformation_export.web_subnet_a.value,
     data.aws_cloudformation_export.web_subnet_b.value,
-    data.aws_cloudformation_export.web_subnet_c.value,
   ]
   vpc_endpoint_security_group_ids = [
     data.aws_cloudformation_export.app_sg_id.value,

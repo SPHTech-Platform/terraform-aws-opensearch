@@ -34,6 +34,12 @@ variable "cf_export_web_subnet_b" {
   default     = "subnetIDWebB-ap-southeast-1"
 }
 
+variable "cf_export_web_subnet_c" {
+  description = "cf_export_web_subnet_c"
+  type        = string
+  default     = "subnetIDWebC-ap-southeast-1"
+}
+
 variable "cf_export_app_sg_id" {
   description = "app security group id"
   type        = string

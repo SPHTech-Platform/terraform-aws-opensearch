@@ -1,3 +1,3 @@
 resource "opensearch_monitor" "this" {
-  body = var.body
+  body = jsonencode(var.body)
 }

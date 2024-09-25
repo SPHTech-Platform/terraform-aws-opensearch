@@ -1,7 +1,3 @@
-locals {
-  id = coalesce(var.pattern_id, split("-*", var.pattern)[0])
-}
-
 module "tenant" {
   source = "../../modules/dashboard/tenant"
 

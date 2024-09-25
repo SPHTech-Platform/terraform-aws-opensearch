@@ -50,7 +50,7 @@ locals {
       comparison_operator = "GreaterThanOrEqualToThreshold"
       evaluation_periods  = 1
       threshold           = 1
-      period              = 5 * local.minute
+      period              = 1 * local.minute
 
       namespace          = "ES/OpenSearchService"
       metric_name        = "ClusterIndexWritesBlocked"

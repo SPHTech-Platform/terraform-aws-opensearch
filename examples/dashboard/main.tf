@@ -8,7 +8,7 @@ module "index_pattern" {
   source = "../../modules/dashboard/index-pattern"
 
   tenant_name     = module.tenant.name
-  pattern         = "test-*"
+  pattern         = var.pattern
   time_field_name = var.time_field_name
 }
 

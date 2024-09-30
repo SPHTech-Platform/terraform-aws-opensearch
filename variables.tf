@@ -413,16 +413,28 @@ variable "cloudwatch_log_group_retention_days" {
 ############
 ## Alerts ##
 ############
+variable "create_alarms" {
+  description = "Whether to create default set of alarms"
+  type        = bool
+  default     = true
+}
+
 variable "alarm_actions" {
   description = "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN)"
   type        = list(string)
   default     = []
 }
 
-variable "create_alarms" {
-  description = "Whether to create default set of alarms"
-  type        = bool
-  default     = true
+variable "ok_actions" {
+  description = "The list of actions to execute when this alarm transitions into an OK state from any other state"
+  type        = list(string)
+  default     = []
+}
+
+variable "insufficient_data_actions" {
+  description = "The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state"
+  type        = list(string)
+  default     = []
 }
 
 variable "alarm_overrides" {

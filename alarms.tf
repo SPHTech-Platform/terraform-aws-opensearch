@@ -20,7 +20,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     cluster_status_yellow = {
@@ -40,7 +42,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     cluster_writes_blocked = {
@@ -60,7 +64,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     unreachable_nodes = {
@@ -80,7 +86,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
     # /cluster status
 
@@ -103,7 +111,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     master_high_cpu_utilization = {
@@ -124,7 +134,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     warm_high_cpu_utilization = {
@@ -146,7 +158,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
     # /cpuutilization
 
@@ -169,7 +183,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     data_high_oldjvm_pressure = {
@@ -190,7 +206,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     master_high_jvm_pressure = {
@@ -211,7 +229,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     master_high_oldjvm_pressure = {
@@ -232,7 +252,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
     # /jvmpressure
 
@@ -256,7 +278,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     aos_key_inaccessible = {
@@ -278,7 +302,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     # 5xx errors
@@ -299,7 +325,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     # threadpool
@@ -320,7 +348,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     threadpool_high_search_avg = {
@@ -340,7 +370,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     threadpool_high_search_max = {
@@ -360,7 +392,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
 
     # Migrations
@@ -382,7 +416,9 @@ locals {
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
       }
-      alarm_actions = var.alarm_actions
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
     }
   }
 

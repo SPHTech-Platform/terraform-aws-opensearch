@@ -1,5 +1,5 @@
 locals {
-  id = coalesce(var.pattern_id, split("-*", var.pattern)[0])
+  id = coalesce(var.pattern_id, var.pattern)
 }
 
 resource "opensearch_dashboard_object" "index_pattern" {
@@ -8,7 +8,6 @@ resource "opensearch_dashboard_object" "index_pattern" {
 [
   {
     "_id": "index-pattern:${local.id}",
-    "_type": "doc",
     "_source": {
       "type": "index-pattern",
       "index-pattern": {

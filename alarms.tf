@@ -8,17 +8,18 @@ locals {
       alarm_description = "${aws_opensearch_domain.this.domain_name} has entered redstatus. One or more primary shard and its replicaes are not allocated to a node"
 
       comparison_operator = "GreaterThanOrEqualToThreshold"
-      evaluation_periods  = 1
-      threshold           = 1
+      evaluation_periods  = 5
+      threshold           = 5
       period              = 1 * local.minute
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "ClusterStatus.red"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -34,7 +35,7 @@ locals {
       threshold           = 1
       period              = 1 * local.minute
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "ClusterStatus.yellow"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -56,7 +57,7 @@ locals {
       threshold           = 1
       period              = 1 * local.minute
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "ClusterIndexWritesBlocked"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -78,7 +79,7 @@ locals {
       threshold           = 1
       period              = 60 * local.minute * 24
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "Nodes"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -103,7 +104,7 @@ locals {
       period              = 15 * local.minute
       unit                = "Percent"
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "CPUUtilization"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -126,7 +127,7 @@ locals {
       period              = 15 * local.minute
       unit                = "Percent"
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "MasterCPUUtilization"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -150,7 +151,7 @@ locals {
       period              = 15 * local.minute
       unit                = "Percent"
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "WarmCPUUtilization"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -175,7 +176,7 @@ locals {
       period              = 15 * local.minute
       unit                = "Percent"
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "JVMMemoryPressure"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -198,7 +199,7 @@ locals {
       period              = 15 * local.minute
       unit                = "Percent"
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "OldGenJVMMemoryPressure"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -221,7 +222,7 @@ locals {
       period              = 15 * local.minute
       unit                = "Percent"
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "MasterJVMMemoryPressure"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -244,7 +245,7 @@ locals {
       period              = 60 * local.minute
       unit                = "Percent"
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "MasterOldGenJVMMemoryPressure"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -270,7 +271,7 @@ locals {
       period              = 1 * local.minute
       unit                = "Percent"
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "KMSKeyError"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -294,7 +295,7 @@ locals {
       period              = 1 * local.minute
       unit                = "Percent"
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "KMSKeyInaccessible"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -317,7 +318,7 @@ locals {
       threshold           = 3
       period              = 10 * local.minute
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "5xx"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -340,7 +341,7 @@ locals {
       threshold           = 100
       period              = 1 * local.minute
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "ThreadpoolWriteQueue"
       statistic          = "Average"
       treat_missing_data = "notBreaching"
@@ -362,7 +363,7 @@ locals {
       threshold           = 500
       period              = 1 * local.minute
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "ThreadpoolSearchQueue"
       statistic          = "Average"
       treat_missing_data = "notBreaching"
@@ -384,7 +385,7 @@ locals {
       threshold           = 5000
       period              = 1 * local.minute
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "ThreadpoolSearchQueue"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"
@@ -408,7 +409,7 @@ locals {
       threshold           = 1
       period              = 1 * local.minute
 
-      namespace          = "ES/OpenSearchService"
+      namespace          = "AWS/ES"
       metric_name        = "HotToWarmMigrationFailureCount"
       statistic          = "Maximum"
       treat_missing_data = "notBreaching"

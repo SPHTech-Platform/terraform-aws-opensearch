@@ -15,7 +15,7 @@ locals {
       namespace          = "AWS/ES"
       metric_name        = "ClusterStatus.red"
       statistic          = "Maximum"
-      treat_missing_data = "notBreaching"
+      treat_missing_data = "breaching"
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
@@ -53,17 +53,18 @@ locals {
       alarm_description = "${aws_opensearch_domain.this.domain_name} is blocking write requests"
 
       comparison_operator = "GreaterThanOrEqualToThreshold"
-      evaluation_periods  = 1
-      threshold           = 1
+      evaluation_periods  = 5
+      threshold           = 5
       period              = 1 * local.minute
 
       namespace          = "AWS/ES"
       metric_name        = "ClusterIndexWritesBlocked"
       statistic          = "Maximum"
-      treat_missing_data = "notBreaching"
+      treat_missing_data = "breaching"
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions

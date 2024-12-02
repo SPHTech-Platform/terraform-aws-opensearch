@@ -117,3 +117,36 @@ variable "lifecycle_policy_no_min_index_retention" {
   type        = bool
   default     = null
 }
+
+########
+# SAML
+########
+variable "saml_enabled" {
+  description = "Whether SAML authentication is enabled"
+  type        = bool
+  default     = false
+}
+
+variable "saml_metadata_content" {
+  description = "The metadata of the SAML application in xml format."
+  type        = string
+  default     = ""
+}
+
+variable "saml_session_timeout" {
+  description = "Duration of a session in minutes after a user logs in. Default is 60. Maximum value is 1,440."
+  type        = number
+  default     = 60
+}
+
+variable "saml_group_attribute" {
+  description = "Group attribute for this SAML integration"
+  type        = string
+  default     = ""
+}
+
+variable "saml_user_attribute" {
+  description = "User attribute for this SAML integration"
+  type        = string
+  default     = ""
+}

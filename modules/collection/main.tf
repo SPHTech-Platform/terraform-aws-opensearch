@@ -24,3 +24,22 @@ module "aoss" {
 
   tags = var.tags
 }
+
+resource "aws_opensearchserverless_security_config" "saml" {
+  count = var.saml_enabled ? 1 : 0
+
+  name        = "${var.name}-saml"
+  type        = "saml"
+  description = "SAML config for ${var.name}"
+
+  saml_options {
+    metadata        = var.saml_metadata_content
+    group_attribute = var.saml_group_attribute
+    user_attribute  = var.saml_user_attribute
+    session_timeout = var.saml_session_timeout
+  }
+
+  depends_on = [
+    module.aoss,
+  ]
+}

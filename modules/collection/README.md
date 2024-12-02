@@ -21,6 +21,7 @@
 
 | Name | Type |
 |------|------|
+| [aws_opensearchserverless_security_config.saml](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearchserverless_security_config) | resource |
 | [aws_opensearchserverless_vpc_endpoint.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearchserverless_vpc_endpoint) | resource |
 
 ## Inputs
@@ -43,6 +44,11 @@
 | <a name="input_lifecycle_policy_min_index_retention"></a> [lifecycle\_policy\_min\_index\_retention](#input\_lifecycle\_policy\_min\_index\_retention) | The minimum period, in days (d) or hours (h), to retain the document in the index. The lower bound is `24h` and the upper bound is `3650d` | `string` | `null` | no |
 | <a name="input_lifecycle_policy_no_min_index_retention"></a> [lifecycle\_policy\_no\_min\_index\_retention](#input\_lifecycle\_policy\_no\_min\_index\_retention) | If true, OpenSearch Serverless retains documents indefinitely | `bool` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the OpenSearch Serverless collection. | `string` | n/a | yes |
+| <a name="input_saml_enabled"></a> [saml\_enabled](#input\_saml\_enabled) | Whether SAML authentication is enabled | `bool` | `false` | no |
+| <a name="input_saml_group_attribute"></a> [saml\_group\_attribute](#input\_saml\_group\_attribute) | Group attribute for this SAML integration | `string` | `""` | no |
+| <a name="input_saml_metadata_content"></a> [saml\_metadata\_content](#input\_saml\_metadata\_content) | The metadata of the SAML application in xml format. | `string` | `""` | no |
+| <a name="input_saml_session_timeout"></a> [saml\_session\_timeout](#input\_saml\_session\_timeout) | Duration of a session in minutes after a user logs in. Default is 60. Maximum value is 1,440. | `number` | `60` | no |
+| <a name="input_saml_user_attribute"></a> [saml\_user\_attribute](#input\_saml\_user\_attribute) | User attribute for this SAML integration | `string` | `""` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | Security group IDs attached to the VPC endpoint. Needed only if `create_vpc_endpoint` is true | `list(string)` | `[]` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | Subnet IDs in which the VPC endpoint is created. Needed only if `create_vpc_endpoint` is true | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A mapping of tags to assign to the resources | `map(string)` | `{}` | no |

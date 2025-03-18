@@ -27,6 +27,19 @@ resource "aws_opensearch_domain" "this" {
     warm_count   = var.warm_instance_enabled ? var.warm_instance_count : null
     warm_type    = var.warm_instance_enabled ? var.warm_instance_type : null
 
+    dynamic "node_options" {
+      for_each = var.coordinator_instance_enabled ? [1] : []
+
+      content {
+        node_type = "coordinator"
+        node_config {
+          enabled = true
+          type    = var.coordinator_instance_type
+          count   = var.coordinator_instance_count
+        }
+      }
+    }
+
     zone_awareness_enabled = (var.availability_zones > 1) ? true : false
 
     dynamic "zone_awareness_config" {

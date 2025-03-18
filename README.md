@@ -3,13 +3,13 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.4 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.16 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.90 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.16 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.90 |
 
 ## Modules
 
@@ -55,6 +55,9 @@
 | <a name="input_cognito_role_arn"></a> [cognito\_role\_arn](#input\_cognito\_role\_arn) | ARN of the IAM role that has the AmazonOpenSearchServiceCognitoAccess policy attached. | `string` | `""` | no |
 | <a name="input_cognito_user_id_pool"></a> [cognito\_user\_id\_pool](#input\_cognito\_user\_id\_pool) | ID of the Cognito User Pool to use. | `string` | `""` | no |
 | <a name="input_cold_storage_enabled"></a> [cold\_storage\_enabled](#input\_cold\_storage\_enabled) | Enable cold storage. Master and ultrawarm nodes must be enabled for cold storage. | `bool` | `false` | no |
+| <a name="input_coordinator_instance_count"></a> [coordinator\_instance\_count](#input\_coordinator\_instance\_count) | The number of coordinator nodes in the cluster. | `number` | `3` | no |
+| <a name="input_coordinator_instance_enabled"></a> [coordinator\_instance\_enabled](#input\_coordinator\_instance\_enabled) | Indicates whether coordinator nodes are enabled for the cluster. | `bool` | `false` | no |
+| <a name="input_coordinator_instance_type"></a> [coordinator\_instance\_type](#input\_coordinator\_instance\_type) | The type of EC2 instances to run for each coordinator node. | `string` | `""` | no |
 | <a name="input_create_alarms"></a> [create\_alarms](#input\_create\_alarms) | Whether to create default set of alarms | `bool` | `true` | no |
 | <a name="input_create_service_role"></a> [create\_service\_role](#input\_create\_service\_role) | Indicates whether to create the service-linked role. See https://docs.aws.amazon.com/opensearch-service/latest/developerguide/slr.html | `bool` | `false` | no |
 | <a name="input_create_vpc_endpoint"></a> [create\_vpc\_endpoint](#input\_create\_vpc\_endpoint) | Whether to create a VPC endpoint for the domain | `bool` | `false` | no |

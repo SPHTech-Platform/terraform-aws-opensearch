@@ -34,7 +34,7 @@ module "opensearch" {
   ebs_enabled = true
   ebs_iops    = 5000
 
-  # If coordinatyor nodes are need. This is disabled by default
+  # If dedicated coordinator nodes are need. This is disabled by default
   coordinator_instance_enabled = true
   # Coordinator node count must be less than or equal to data node count
   coordinator_instance_count = 2

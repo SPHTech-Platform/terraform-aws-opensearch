@@ -34,6 +34,12 @@ module "opensearch" {
   ebs_enabled = true
   ebs_iops    = 5000
 
+  # If dedicated coordinator nodes are need. This is disabled by default
+  coordinator_instance_enabled = true
+  # Coordinator node count must be less than or equal to data node count
+  coordinator_instance_count = 2
+  coordinator_instance_type  = "m5.large.search"
+
   subnet_ids = [
     data.aws_cloudformation_export.web_subnet_a.value,
     data.aws_cloudformation_export.web_subnet_b.value,

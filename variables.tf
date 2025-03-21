@@ -150,6 +150,24 @@ variable "cold_storage_enabled" {
   default     = false
 }
 
+variable "coordinator_instance_enabled" {
+  description = "Indicates whether coordinator nodes are enabled for the cluster."
+  type        = bool
+  default     = false
+}
+
+variable "coordinator_instance_type" {
+  description = "The type of EC2 instances to run for each coordinator node."
+  type        = string
+  default     = ""
+}
+
+variable "coordinator_instance_count" {
+  description = "The number of coordinator nodes in the cluster."
+  type        = number
+  default     = 3
+}
+
 variable "availability_zones" {
   description = "The number of availability zones for the OpenSearch cluster. Valid values: 1, 2 or 3."
   type        = number

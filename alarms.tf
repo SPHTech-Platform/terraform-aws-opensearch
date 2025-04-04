@@ -422,6 +422,29 @@ locals {
       ok_actions                = var.ok_actions
       insufficient_data_actions = var.insufficient_data_actions
     }
+
+    warm_to_hot_migration_queue = {
+      create_metric_alarm = var.warm_instance_enabled
+      alarm_name          = "${aws_opensearch_domain.this.domain_name}_warm_to_hot_migration_queue"
+      alarm_description   = "Indices queued for warm to hot migration"
+
+      comparison_operator = "GreaterThanOrEqualToThreshold"
+      evaluation_periods  = 1
+      threshold           = 1
+      period              = 1 * local.minute
+
+      namespace          = "AWS/ES"
+      metric_name        = "WarmToHotMigrationQueueSize"
+      statistic          = "Maximum"
+      treat_missing_data = "notBreaching"
+
+      dimensions = {
+        DomainName = aws_opensearch_domain.this.domain_name
+      }
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
+    }
   }
 
   alarms = { for k, v in local.default_alarms : k => merge(v, try(var.alarm_overrides[k], {})) if var.create_alarms && !contains(var.disabled_alarms, k) }

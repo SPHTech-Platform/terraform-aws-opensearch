@@ -14,7 +14,6 @@ resource "aws_opensearch_domain" "this" {
   engine_version  = var.engine_version
   access_policies = null
   # access_policies = data.aws_iam_policy_document.combined.json
-  multi_az_with_standby_enabled = var.multi_az_with_standby_enabled
 
   cluster_config {
     dedicated_master_enabled = var.master_instance_enabled
@@ -24,9 +23,10 @@ resource "aws_opensearch_domain" "this" {
     instance_count = var.instance_count
     instance_type  = var.instance_type
 
-    warm_enabled = var.warm_instance_enabled
-    warm_count   = var.warm_instance_enabled ? var.warm_instance_count : null
-    warm_type    = var.warm_instance_enabled ? var.warm_instance_type : null
+    warm_enabled                  = var.warm_instance_enabled
+    warm_count                    = var.warm_instance_enabled ? var.warm_instance_count : null
+    warm_type                     = var.warm_instance_enabled ? var.warm_instance_type : null
+    multi_az_with_standby_enabled = var.multi_az_with_standby_enabled
 
     dynamic "node_options" {
       for_each = var.coordinator_instance_enabled ? [1] : []

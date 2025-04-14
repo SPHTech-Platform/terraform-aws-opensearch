@@ -466,3 +466,9 @@ variable "disabled_alarms" {
   type        = list(string)
   default     = []
 }
+
+variable "multi_az_with_standby_enabled" {
+  description = "Indicates whether multi-AZ with standy is enabled for the cluster."
+  type        = bool
+  default     = false
+}

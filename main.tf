@@ -14,6 +14,7 @@ resource "aws_opensearch_domain" "this" {
   engine_version  = var.engine_version
   access_policies = null
   # access_policies = data.aws_iam_policy_document.combined.json
+  multi_az_with_standby_enabled = var.multi_az_with_standby_enabled
 
   cluster_config {
     dedicated_master_enabled = var.master_instance_enabled

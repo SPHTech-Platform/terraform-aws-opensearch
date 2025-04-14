@@ -1,3 +1,4 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -88,6 +89,7 @@
 | <a name="input_master_user_arn"></a> [master\_user\_arn](#input\_master\_user\_arn) | The ARN for the master user of the cluster. If not specified, then it defaults to using the IAM user that is making the request. | `string` | `""` | no |
 | <a name="input_master_user_name"></a> [master\_user\_name](#input\_master\_user\_name) | Main user's username, which is stored in the Amazon OpenSearch Service domain's internal database | `string` | `""` | no |
 | <a name="input_master_user_password"></a> [master\_user\_password](#input\_master\_user\_password) | Main user's password, which is stored in the Amazon OpenSearch Service domain's internal database | `string` | `""` | no |
+| <a name="input_multi_az_with_standby_enabled"></a> [multi\_az\_with\_standby\_enabled](#input\_multi\_az\_with\_standby\_enabled) | Indicates whether multi-AZ with standy is enabled for the cluster. | `bool` | `false` | no |
 | <a name="input_node_to_node_encryption_enabled"></a> [node\_to\_node\_encryption\_enabled](#input\_node\_to\_node\_encryption\_enabled) | Enable node-to-node encryption. | `bool` | `true` | no |
 | <a name="input_off_peak_window_options"></a> [off\_peak\_window\_options](#input\_off\_peak\_window\_options) | Configuration for off peak window | `map(any)` | <pre>{<br/>  "hours": 14,<br/>  "minutes": 0<br/>}</pre> | no |
 | <a name="input_ok_actions"></a> [ok\_actions](#input\_ok\_actions) | The list of actions to execute when this alarm transitions into an OK state from any other state | `list(string)` | `[]` | no |
@@ -122,3 +124,4 @@
 | <a name="output_vpc_endpoint_dns_names"></a> [vpc\_endpoint\_dns\_names](#output\_vpc\_endpoint\_dns\_names) | VPC endpoint DNS names |
 | <a name="output_vpc_endpoint_endpoint"></a> [vpc\_endpoint\_endpoint](#output\_vpc\_endpoint\_endpoint) | The connection endpoint ID for connecting to the domain |
 | <a name="output_vpc_endpoint_id"></a> [vpc\_endpoint\_id](#output\_vpc\_endpoint\_id) | The unique identifier of the endpoint |
+<!-- END_TF_DOCS -->

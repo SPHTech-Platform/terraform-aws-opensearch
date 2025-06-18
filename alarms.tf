@@ -192,7 +192,7 @@ locals {
 
     data_high_oldjvm_pressure = {
       alarm_name        = "${aws_opensearch_domain.this.domain_name}_data_high_oldgenjvm_pressure"
-      alarm_description = "high old gen jvm pressure on aos warm nodes"
+      alarm_description = "high old gen jvm pressure on aos data nodes"
 
       comparison_operator = "GreaterThanOrEqualToThreshold"
       evaluation_periods  = 3
@@ -259,6 +259,28 @@ locals {
       insufficient_data_actions = var.insufficient_data_actions
     }
     # /jvmpressure
+
+    # storage
+    free_storage_space = {
+      alarm_name        = "${aws_opensearch_domain.this.domain_name}_free_storage_space"
+      alarm_description = "Free storage space is <= 25% for a node"
+
+      comparison_operator = "LessThanOrEqualToThreshold"
+      evaluation_periods  = 1
+      threshold           = 0.25 * (var.ebs_volume_size * 1024)
+      period              = 5 * local.minute
+      namespace           = "AWS/ES"
+      metric_name         = "FreeStorageSpace"
+      statistic           = "Minimum"
+      treat_missing_data  = "notBreaching"
+
+      dimensions = {
+        DomainName = aws_opensearch_domain.this.domain_name
+      }
+      alarm_actions             = var.alarm_actions
+      ok_actions                = var.ok_actions
+      insufficient_data_actions = var.insufficient_data_actions
+    }
 
     # kms
     aos_key_error = {

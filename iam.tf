@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "aos_access_policy" {
 
     actions = ["es:*"]
 
-    resources = ["arn:aws:es:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:domain/${var.domain_name}/*"]
+    resources = ["arn:aws:es:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:domain/${var.domain_name}/*"]
   }
 
   dynamic "statement" {
@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "aos_access_policy" {
 
       actions = ["es:ESHttp*"]
 
-      resources = ["arn:aws:es:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:domain/${var.domain_name}/*"]
+      resources = ["arn:aws:es:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:domain/${var.domain_name}/*"]
 
       condition {
         test     = "IpAddress"

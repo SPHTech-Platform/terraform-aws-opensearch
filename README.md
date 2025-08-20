@@ -1,22 +1,21 @@
-<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.4 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.90 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.90 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cloudwatch_alarms"></a> [cloudwatch\_alarms](#module\_cloudwatch\_alarms) | terraform-aws-modules/cloudwatch/aws//wrappers/metric-alarm | ~> 5.4.0 |
+| <a name="module_cloudwatch_alarms"></a> [cloudwatch\_alarms](#module\_cloudwatch\_alarms) | terraform-aws-modules/cloudwatch/aws//wrappers/metric-alarm | ~> 5.7.0 |
 
 ## Resources
 
@@ -124,4 +123,3 @@
 | <a name="output_vpc_endpoint_dns_names"></a> [vpc\_endpoint\_dns\_names](#output\_vpc\_endpoint\_dns\_names) | VPC endpoint DNS names |
 | <a name="output_vpc_endpoint_endpoint"></a> [vpc\_endpoint\_endpoint](#output\_vpc\_endpoint\_endpoint) | The connection endpoint ID for connecting to the domain |
 | <a name="output_vpc_endpoint_id"></a> [vpc\_endpoint\_id](#output\_vpc\_endpoint\_id) | The unique identifier of the endpoint |
-<!-- END_TF_DOCS -->

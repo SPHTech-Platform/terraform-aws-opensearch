@@ -1,6 +1,6 @@
 module "pipeline_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "~> 5.5.0"
+  version = "~> 5.60.0"
 
   create_role      = true
   role_name        = var.pipeline_role_name
@@ -17,7 +17,7 @@ module "pipeline_role" {
 
 module "pipeline_opensearch_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "~> 5.5.0"
+  version = "~> 5.60.0"
 
   create_policy = local.create_opensearch_ingestion_policy
 

@@ -1,16 +1,15 @@
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.4 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.36 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.46.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.36.0 |
 
 ## Modules
 
@@ -52,4 +51,3 @@ No modules.
 | <a name="output_arn"></a> [arn](#output\_arn) | ARN of the ingestion pipeline |
 | <a name="output_id"></a> [id](#output\_id) | ID of the ingestion pipeline |
 | <a name="output_ingest_endpoint_urls"></a> [ingest\_endpoint\_urls](#output\_ingest\_endpoint\_urls) | The ingestion endpoints for the pipeline that you can send data to |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

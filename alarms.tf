@@ -474,7 +474,7 @@ locals {
 
 module "cloudwatch_alarms" {
   source  = "terraform-aws-modules/cloudwatch/aws//wrappers/metric-alarm"
-  version = "~> 5.4.0"
+  version = "~> 5.7.0"
 
   items = local.alarms
 }

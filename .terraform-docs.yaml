@@ -9,9 +9,9 @@ output:
   mode: replace
   template: |
     # OpenSearch
-    
+
     Create an AWS managed OpenSearch cluster with supporting resources.
-    
+
     {{ .Content }}
 
 settings:

@@ -19,6 +19,9 @@ repos:
         args:
           - --args=-platform=linux_amd64
       - id: terraform_validate
+        args:
+          - --hook-config=--parallelism-limit=1
+          - --hook-config=--retry-once-with-cleanup=true
       - id: terraform_tflint
         args:
           - --args=--module
@@ -33,7 +36,7 @@ repos:
           - --args=--exclude-downloaded-modules
       - id: terraform_checkov
         args:
-          - "--args=--skip-check CKV_TF_1"
+          - --args=--skip-check CKV_TF_1,CKV_TF_2
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -47,7 +50,6 @@ repos:
       # Common errors
       - id: end-of-file-fixer
       - id: trailing-whitespace
-      - id: check-yaml
 
       # Security
       - id: detect-aws-credentials

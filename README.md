@@ -1,3 +1,7 @@
+# OpenSearch
+
+Create an AWS managed OpenSearch cluster with supporting resources.
+
 ## Requirements
 
 | Name | Version |

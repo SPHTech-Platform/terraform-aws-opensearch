@@ -7,7 +7,12 @@ formatter: "markdown table"
 output:
   file: "README.md"
   mode: replace
-  template: |-
+  template: |
+    # OpenSearch
+
+    Create an AWS managed OpenSearch cluster with supporting resources.
+
     {{ .Content }}
+
 settings:
   lockfile: false

@@ -1,17 +1,54 @@
 name: terraform-ci
 on:
   pull_request:
-permissions:
-  id-token: write
-  actions: read
-  checks: read
-  contents: read
-  pull-requests: write
 jobs:
-  ci:
-    uses: SPHTech-Platform/platform-reusable-workflow/.github/workflows/terraform.yaml@main
-    with:
-      upload_sarif: false
-      runner_label: platform-eng-ent-v2-dual
-      skip_tflint_warn_for_changed_files: true
-    secrets: inherit
+  fmt-validate:
+    needs: []
+    name: Run format and validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - run: git fetch --depth=1 origin +${{github.base_ref}}
+      - uses: actions/setup-python@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: latest
+      - name: Terraform init
+        run: terraform init
+      - name: precommit run hooks
+        uses: pre-commit/action@v3.0.1
+        env:
+          SKIP: tflint,markdown-link-check,terraform_docs,terraform_tfsec,checkov
+        with:
+          extra_args: --color=always --show-diff-on-failure --all-files
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: terraform -v
+
+  lint:
+    needs: []
+    name: Run tflint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: latest
+      - name: Terraform init
+        run: terraform init
+      - name: Run tflint with review comment on PR
+        uses: reviewdog/action-tflint@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tflint_init: true
+          filter_mode: "nofilter"
+          reporter: github-pr-review
+          # tflint_rulesets: "aws"
+          flags: --module

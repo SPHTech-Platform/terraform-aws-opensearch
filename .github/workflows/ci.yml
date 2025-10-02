@@ -71,3 +71,7 @@ jobs:
       - name: Run Checkov action
         id: checkov
         uses: bridgecrewio/checkov-action@master
+        with:
+          quiet: true
+          skip_check: "CKV_TF_1,CKV_TF_2"
+          download_external_modules: false

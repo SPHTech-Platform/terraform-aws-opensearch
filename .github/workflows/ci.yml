@@ -74,4 +74,4 @@ jobs:
         with:
           quiet: true
           skip_check: "CKV_TF_1,CKV_TF_2"
-          download_external_modules: false
+          download_external_modules: true

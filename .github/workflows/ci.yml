@@ -52,3 +52,26 @@ jobs:
           reporter: github-pr-review
           # tflint_rulesets: "aws"
           flags: --module
+
+  security:
+    name: Run tfsec
+    needs: [ ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Run tfsec with reviewdog output on the PR
+        uses: reviewdog/action-tfsec@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          flags: -tee
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          quiet: true
+          skip_check: "CKV_TF_1,CKV_TF_2"
+          download_external_modules: true

@@ -9,7 +9,10 @@ jobs:
   autoupdate:
     runs-on: ubuntu-latest
     permissions:
+      actions: read
+      checks: read
       contents: write
+      pull-requests: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v6

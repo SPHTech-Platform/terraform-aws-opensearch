@@ -1,25 +1,38 @@
 module "pipeline_role" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "~> 5.60.0"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role"
+  version = "~> 6.2.0"
 
-  create_role      = true
-  role_name        = var.pipeline_role_name
-  role_description = "IAM Role to be assumed by Opensearch ingestion pipeline"
+  name            = var.pipeline_role_name
+  description     = "IAM Role to be assumed by Opensearch ingestion pipeline"
+  use_name_prefix = false
 
-  trusted_role_services = [
-    "osis-pipelines.amazonaws.com",
-  ]
-  role_requires_mfa       = false
-  custom_role_policy_arns = local.create_opensearch_ingestion_policy ? [module.pipeline_opensearch_policy.arn] : []
+  trust_policy_permissions = {
+    TrustedServices = {
+      actions = [
+        "sts:AssumeRole",
+        "sts:TagSession",
+      ]
+      principals = [
+        {
+          type        = "Service"
+          identifiers = ["osis-pipelines.amazonaws.com"]
+        }
+      ]
+    }
+  }
+
+  policies = {
+    OpensearchAccess = module.pipeline_opensearch_policy.arn
+  }
 
   tags = var.tags
 }
 
 module "pipeline_opensearch_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "~> 5.60.0"
+  version = "~> 6.2.0"
 
-  create_policy = local.create_opensearch_ingestion_policy
+  create = local.create_opensearch_ingestion_policy
 
   name        = "${var.pipeline_role_name}-ingestion-policy"
   path        = "/"

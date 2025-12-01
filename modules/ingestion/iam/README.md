@@ -3,20 +3,20 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.38 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.67.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_pipeline_opensearch_policy"></a> [pipeline\_opensearch\_policy](#module\_pipeline\_opensearch\_policy) | terraform-aws-modules/iam/aws//modules/iam-policy | ~> 5.60.0 |
-| <a name="module_pipeline_role"></a> [pipeline\_role](#module\_pipeline\_role) | terraform-aws-modules/iam/aws//modules/iam-assumable-role | ~> 5.60.0 |
+| <a name="module_pipeline_opensearch_policy"></a> [pipeline\_opensearch\_policy](#module\_pipeline\_opensearch\_policy) | terraform-aws-modules/iam/aws//modules/iam-policy | ~> 6.2.0 |
+| <a name="module_pipeline_role"></a> [pipeline\_role](#module\_pipeline\_role) | terraform-aws-modules/iam/aws//modules/iam-role | ~> 6.2.0 |
 
 ## Resources
 

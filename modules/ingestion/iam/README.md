@@ -28,6 +28,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_additional_iam_policies"></a> [additional\_iam\_policies](#input\_additional\_iam\_policies) | (Optional) Map of additional IAM policies to attach to the pipeline role | `map(string)` | `{}` | no |
 | <a name="input_opensearch_domain_arns"></a> [opensearch\_domain\_arns](#input\_opensearch\_domain\_arns) | (Optional) The ARN's of the OpenSearch domains to ingest data into | `list(string)` | `[]` | no |
 | <a name="input_pipeline_role_name"></a> [pipeline\_role\_name](#input\_pipeline\_role\_name) | The name of the pipline IAM role | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources | `map(string)` | `{}` | no |

@@ -9,6 +9,12 @@ variable "opensearch_domain_arns" {
   default     = []
 }
 
+variable "additional_iam_policies" {
+  description = "(Optional) Map of additional IAM policies to attach to the pipeline role"
+  type        = map(string)
+  default     = {}
+}
+
 variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)

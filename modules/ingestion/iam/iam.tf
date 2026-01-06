@@ -21,9 +21,12 @@ module "pipeline_role" {
     }
   }
 
-  policies = {
-    OpensearchAccess = module.pipeline_opensearch_policy.arn
-  }
+  policies = merge(
+    {
+      OpensearchAccess = module.pipeline_opensearch_policy.arn
+    },
+    var.additional_iam_policies
+  )
 
   tags = var.tags
 }

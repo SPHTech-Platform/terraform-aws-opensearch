@@ -173,7 +173,7 @@ locals {
 
       comparison_operator = "GreaterThanOrEqualToThreshold"
       evaluation_periods  = 3
-      threshold           = 95
+      threshold           = 90
       period              = 15 * local.minute
       unit                = "Percent"
 
@@ -196,7 +196,7 @@ locals {
 
       comparison_operator = "GreaterThanOrEqualToThreshold"
       evaluation_periods  = 3
-      threshold           = 95
+      threshold           = 90
       period              = 15 * local.minute
       unit                = "Percent"
 
@@ -219,7 +219,7 @@ locals {
 
       comparison_operator = "GreaterThanOrEqualToThreshold"
       evaluation_periods  = 3
-      threshold           = 95
+      threshold           = 85
       period              = 15 * local.minute
       unit                = "Percent"
 
@@ -242,7 +242,7 @@ locals {
 
       comparison_operator = "GreaterThanOrEqualToThreshold"
       evaluation_periods  = 3
-      threshold           = 80
+      threshold           = 85
       period              = 60 * local.minute
       unit                = "Percent"
 

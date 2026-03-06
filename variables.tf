@@ -428,6 +428,12 @@ variable "cloudwatch_log_group_retention_days" {
   default     = 7
 }
 
+variable "cloudwatch_log_group_class" {
+  description = "(Optional) The class of the log group. Possible values are: `STANDARD`, `INFREQUENT_ACCESS`, or `DELIVERY`"
+  type        = string
+  default     = "STANDARD"
+}
+
 ############
 ## Alerts ##
 ############

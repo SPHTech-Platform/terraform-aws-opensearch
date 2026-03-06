@@ -32,6 +32,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cloudwatch_kms_key_id"></a> [cloudwatch\_kms\_key\_id](#input\_cloudwatch\_kms\_key\_id) | (Optional) KMS key ID for Cloudwatch logs | `string` | `null` | no |
+| <a name="input_cloudwatch_log_group_class"></a> [cloudwatch\_log\_group\_class](#input\_cloudwatch\_log\_group\_class) | (Optional) The class of the log group. Possible values are: `STANDARD`, `INFREQUENT_ACCESS`, or `DELIVERY` | `string` | `"STANDARD"` | no |
 | <a name="input_configuration_body"></a> [configuration\_body](#input\_configuration\_body) | The Data Prepper pipeline configuration in YAML format | `string` | n/a | yes |
 | <a name="input_enable_logging"></a> [enable\_logging](#input\_enable\_logging) | If true, will create a cloudwatch log group to monitor the pipeline | `bool` | `true` | no |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | Name of the pipeline IAM role | `string` | n/a | yes |

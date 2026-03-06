@@ -6,6 +6,7 @@ resource "aws_cloudwatch_log_group" "this" {
   name              = local.pipeline_log_group
   kms_key_id        = var.cloudwatch_kms_key_id
   retention_in_days = var.log_group_retention_days
+  log_group_class   = var.cloudwatch_log_group_class
 
   tags = var.tags
 }

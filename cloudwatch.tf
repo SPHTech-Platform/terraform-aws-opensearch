@@ -9,6 +9,7 @@ resource "aws_cloudwatch_log_group" "aos" {
 
   name              = "${local.log_prefix}/${each.key}"
   retention_in_days = var.cloudwatch_log_group_retention_days
+  log_group_class   = var.cloudwatch_log_group_class
 }
 
 data "aws_iam_policy_document" "aos_log_publishing" {

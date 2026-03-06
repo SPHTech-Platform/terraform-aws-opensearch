@@ -35,6 +35,12 @@ variable "cloudwatch_kms_key_id" {
   default     = null
 }
 
+variable "cloudwatch_log_group_class" {
+  description = "(Optional) The class of the log group. Possible values are: `STANDARD`, `INFREQUENT_ACCESS`, or `DELIVERY`"
+  type        = string
+  default     = "STANDARD"
+}
+
 variable "subnet_ids" {
   description = "Subnet IDs to deploy pipeline in. Only needed if pipeline is to be deployed in VPC mode"
   type        = list(string)

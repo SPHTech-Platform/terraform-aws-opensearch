@@ -6,6 +6,12 @@ jobs:
     needs: []
     name: Run format and validate
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      actions: read
+      checks: read
+      contents: read
+      pull-requests: read
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -32,6 +38,12 @@ jobs:
     needs: []
     name: Run tflint
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      actions: read
+      checks: read
+      contents: read
+      pull-requests: read
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -55,8 +67,14 @@ jobs:
 
   security:
     name: Run tfsec
-    needs: [ ]
+    needs: []
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      actions: read
+      checks: read
+      contents: read
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v6

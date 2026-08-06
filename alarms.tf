@@ -42,6 +42,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -87,6 +88,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -112,6 +114,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -135,6 +138,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -159,6 +163,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -184,6 +189,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -207,6 +213,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -230,6 +237,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -253,6 +261,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -276,6 +285,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -301,6 +311,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -325,6 +336,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -348,6 +360,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -371,6 +384,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -393,6 +407,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -415,6 +430,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -439,6 +455,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions
@@ -462,6 +479,7 @@ locals {
 
       dimensions = {
         DomainName = aws_opensearch_domain.this.domain_name
+        ClientId   = data.aws_caller_identity.current.account_id
       }
       alarm_actions             = var.alarm_actions
       ok_actions                = var.ok_actions

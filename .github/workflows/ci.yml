@@ -30,7 +30,7 @@ jobs:
       - name: precommit run hooks
         uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
         env:
-          SKIP: tflint,markdown-link-check,tofu_docs,terraform_tfsec,checkov
+          SKIP: tflint,markdown-link-check,terraform_docs,terraform_tfsec,checkov
         with:
           extra_args: --color=always --show-diff-on-failure --all-files
           token: ${{ secrets.GITHUB_TOKEN }}

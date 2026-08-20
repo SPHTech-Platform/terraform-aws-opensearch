@@ -2,8 +2,8 @@ repos:
   - repo: https://github.com/gruntwork-io/pre-commit
     rev: v0.1.30
     hooks:
-      - id: terraform-fmt
-      - id: terraform-validate
+      - id: tofu-fmt
+      - id: tofu-validate
       - id: tflint
         args:
           - "--module"
@@ -12,14 +12,14 @@ repos:
       - id: shellcheck
 
   - repo: https://github.com/tcort/markdown-link-check
-    rev: v3.14.2
+    rev: v3.15.0
     hooks:
       - id: markdown-link-check
         args:
           - "--config=mlc_config.json"
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.105.0
+    rev: v1.108.1
     hooks:
       - id: terraform_docs
         args:

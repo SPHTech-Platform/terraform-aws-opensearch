@@ -1,4 +1,4 @@
-name: terraform-ci
+name: tofu-ci
 on:
   pull_request:
 jobs:
@@ -14,25 +14,27 @@ jobs:
       pull-requests: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
       - run: git fetch --depth=1 origin +${{github.base_ref}}
-      - uses: actions/setup-python@v7
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v4
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          terraform_version: latest
-      - name: Terraform init
-        run: terraform init
+          python-version: "3.14"
+      - name: Setup Tofu
+        uses: opentofu/setup-opentofu@a1320f892987e89d278cc92dc5adc984fb93aca4 # v2.0.2
+        with:
+          tofu_version: 1.11.13
+      - name: Tofu init
+        run: tofu init
       - name: precommit run hooks
-        uses: pre-commit/action@v3.0.1
+        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
         env:
           SKIP: tflint,markdown-link-check,terraform_docs,terraform_tfsec,checkov
         with:
           extra_args: --color=always --show-diff-on-failure --all-files
           token: ${{ secrets.GITHUB_TOKEN }}
-      - run: terraform -v
+      - run: tofu -v
 
   lint:
     needs: []
@@ -46,17 +48,17 @@ jobs:
       pull-requests: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v4
+      - name: Setup Tofu
+        uses: opentofu/setup-opentofu@a1320f892987e89d278cc92dc5adc984fb93aca4 # v2.0.2
         with:
-          terraform_version: latest
-      - name: Terraform init
-        run: terraform init
+          tofu_version: 1.11.13
+      - name: Tofu init
+        run: tofu init
       - name: Run tflint with review comment on PR
-        uses: reviewdog/action-tflint@master
+        uses: reviewdog/action-tflint@54a5e5aed57dcfbb4662ec548de876df33d6288d # v1.25.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tflint_init: true
@@ -77,18 +79,18 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
       - name: Run tfsec with reviewdog output on the PR
-        uses: reviewdog/action-tfsec@master
+        uses: reviewdog/action-tfsec@a2f2edbf61c6bb22849de705d304b9d2af5f69cd # v1.30.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           flags: -tee
       - name: Run Checkov action
         id: checkov
-        uses: bridgecrewio/checkov-action@master
+        uses: bridgecrewio/checkov-action@99bb2caf247dfd9f03cf984373bc6043d4e32ebf # v12.3117.0
         with:
           quiet: true
           skip_check: "CKV_TF_1,CKV_TF_2"

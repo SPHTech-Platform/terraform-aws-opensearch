@@ -1,35 +1,28 @@
-name: Auto-update pre-commit hooks
+name: Autoupdate pre-commit configs and tflint aws plugin
+
 on:
+  # every sunday at midnight
   schedule:
     - cron: "0 0 * * 0"
-  workflow_dispatch: # Allow manual triggering
+  # on demand
+  workflow_dispatch:
 
-permissions: read-all
+# Request from Org admin to allow Github Action workflow to make PR under Settings > Actions > General
+permissions:
+  actions: read
+  checks: read
+  contents: write #require this to write to repo
+  pull-requests: write #require this to create PR
+
 jobs:
-  autoupdate:
+  auto-update:
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      checks: read
-      contents: write
-      pull-requests: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-      - name: Set up Python
-        uses: actions/setup-python@v7
+      - uses: SPHTech-Platform/gha-pre-commit-autoupdate@63fd59b2635b958b4128ba1f3b6859984b04ff47 # v1.1.1
+        name: Update pre-commit config automatically
         with:
-          python-version: "3.13"
-      - name: Install pre-commit
-        run: pip install pre-commit
-      - name: Auto-update pre-commit hooks
-        run: pre-commit autoupdate
-      - name: Create Pull Request if changes exist
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: SPHTech-Platform/gha-tflint-aws-plugin-autoupdate@a098bc733ce612aa57f9ce1a1a384e0c6abf180c # v0.1.0
+        name: Update tflint plugin automatically
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: update pre-commit hooks"
-          title: "chore: update pre-commit hooks"
-          body: "Update pre-commit hooks to their latest versions."
-          branch: 'autoupdate-pre-commit-hooks' # Name of the branch to create
-          delete-branch: true # Delete the branch after merging
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,6 +1,15 @@
 locals {
   minute = 60
 
+  # Every node the domain is configured to run. The Nodes metric counts all of
+  # them, so this is the value a healthy cluster reports.
+  expected_node_count = (
+    var.instance_count
+    + (var.master_instance_enabled ? var.master_instance_count : 0)
+    + (var.warm_instance_enabled ? var.warm_instance_count : 0)
+    + (var.coordinator_instance_enabled ? var.coordinator_instance_count : 0)
+  )
+
   default_alarms = {
     # cluster status
     cluster_status_red = {
@@ -76,9 +85,14 @@ locals {
       alarm_name        = "${aws_opensearch_domain.this.domain_name}_unreachable_nodes"
       alarm_description = "at least one node in your cluster has been unreachable for one day"
 
-      comparison_operator = "GreaterThanOrEqualToThreshold"
+      # Maximum over a full day: the alarm only fires when the cluster never
+      # reached its full node count at any point in the day, which is what
+      # "unreachable for one day" means. A brief dip during a rolling restart
+      # or blue/green deployment still leaves the daily maximum at full count,
+      # so it does not page.
+      comparison_operator = "LessThanThreshold"
       evaluation_periods  = 1
-      threshold           = 1
+      threshold           = local.expected_node_count
       period              = 60 * local.minute * 24
 
       namespace          = "AWS/ES"

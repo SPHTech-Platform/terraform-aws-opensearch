@@ -58,7 +58,7 @@ jobs:
       - name: Tofu init
         run: tofu init
       - name: Run tflint with review comment on PR
-        uses: reviewdog/action-tflint@54a5e5aed57dcfbb4662ec548de876df33d6288d # v1.25.0
+        uses: reviewdog/action-tflint@ac21f7671251b29bbeb280ede595cb9c5b8710c7 # v1.26.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tflint_init: true
@@ -83,14 +83,14 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run tfsec with reviewdog output on the PR
-        uses: reviewdog/action-tfsec@a2f2edbf61c6bb22849de705d304b9d2af5f69cd # v1.30.0
+        uses: reviewdog/action-tfsec@ade3cd012981486a988fb56351d6d42b6bb7d3c9 # v1.31.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           flags: -tee
       - name: Run Checkov action
         id: checkov
-        uses: bridgecrewio/checkov-action@f967808197a8d784d3e72919f38c3ff0cda7884e # v12.3122.0
+        uses: bridgecrewio/checkov-action@a8664e3a0549367977f0cda990a34311835c87c0 # v12.3123.0
         with:
           quiet: true
           skip_check: "CKV_TF_1,CKV_TF_2"

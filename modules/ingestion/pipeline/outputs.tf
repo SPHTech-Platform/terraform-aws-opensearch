@@ -1,6 +1,6 @@
 output "id" {
   description = "ID of the ingestion pipeline"
-  value       = aws_osis_pipeline.this.id
+  value       = var.name
 }
 
 output "arn" {

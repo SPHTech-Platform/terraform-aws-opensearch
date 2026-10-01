@@ -22,7 +22,7 @@ jobs:
         name: Update pre-commit config automatically
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: SPHTech-Platform/gha-tflint-aws-plugin-autoupdate@2e040a4e386e557160f5a544f98f18ef78135edb # v0.1.1
+      - uses: SPHTech-Platform/gha-tflint-aws-plugin-autoupdate@eb89262302ed5ab13fb0cdfbe161c0e8e037a6d1 # v0.2.0
         name: Update tflint plugin automatically
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

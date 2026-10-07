@@ -1,33 +1,36 @@
 repos:
-  - repo: https://github.com/gruntwork-io/pre-commit
-    rev: v0.1.30
-    hooks:
-      - id: tofu-fmt
-      - id: tofu-validate
-      - id: tflint
-        args:
-          - "--module"
-          - "--config=.tflint.hcl"
-      - id: markdown-link-check
-      - id: shellcheck
-
-  - repo: https://github.com/tcort/markdown-link-check
-    rev: v3.15.0
-    hooks:
-      - id: markdown-link-check
-        args:
-          - "--config=mlc_config.json"
-
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.109.1
+    rev: v1.109.2
     hooks:
+      # --tf-path=tofu: this is an OpenTofu repo — without it the hooks shell
+      # out to `terraform`, which resolves providers to registry.terraform.io
+      # (tofu uses registry.opentofu.org) and pollutes lock files.
+      - id: terraform_fmt
+        args:
+          - --hook-config=--tf-path=tofu
+      - id: terraform_providers_lock
+        args:
+          - --args=-platform=linux_amd64
+          - --args=-platform=darwin_arm64
+          - --hook-config=--tf-path=tofu
+      - id: terraform_validate
+        args:
+          - --hook-config=--parallelism-limit=1
+          - --hook-config=--retry-once-with-cleanup=true
+          - --hook-config=--tf-path=tofu
+      - id: terraform_tflint
+        exclude: (^|/)examples[^/]*/
+        args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
       - id: terraform_docs
+        exclude: (^|/)modules[^/]*/
         args:
-          - "--args=--lockfile=false"
-      - id: terraform_tfsec
+          - --hook-config=--config=.terraform-docs.yml
+          - --hook-config=--path-to-file=README.md
+          - --hook-config=--add-to-existing-file=false
+      - id: terraform_checkov
         args:
-          - --args=--exclude-downloaded-modules
-      - id: checkov
+          - "--args=--skip-path cf_templates --skip-check CKV_TF_1"
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -35,15 +38,10 @@ repos:
       # Git style
       - id: check-added-large-files
       - id: check-merge-conflict
-      - id: check-merge-conflict
       - id: no-commit-to-branch
 
       # Common errors
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: check-yaml
-
-      # Security
-      - id: detect-aws-credentials
-        args: ['--allow-missing-credentials']
-      - id: detect-private-key
+        exclude: ".*/templates($|/.*)"

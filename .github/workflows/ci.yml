@@ -64,8 +64,6 @@ jobs:
           tflint_init: true
           filter_mode: "nofilter"
           reporter: github-pr-review
-          # tflint_rulesets: "aws"
-          flags: --module
 
   security:
     name: Run security checks

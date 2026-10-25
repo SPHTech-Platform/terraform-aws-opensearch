@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.109.2
+    rev: v1.109.3
     hooks:
       # --tf-path=tofu: this is an OpenTofu repo — without it the hooks shell
       # out to `terraform`, which resolves providers to registry.terraform.io

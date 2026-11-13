@@ -64,7 +64,7 @@ jobs:
           tflint_init: true
           filter_mode: "nofilter"
           reporter: github-pr-review
-          flags: "--call-module-type=all"
+          flags: --call-module-type=local
 
   security:
     name: Run security checks

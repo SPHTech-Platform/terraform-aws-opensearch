@@ -478,3 +478,24 @@ variable "multi_az_with_standby_enabled" {
   type        = bool
   default     = false
 }
+
+variable "identity_center_options" {
+  description = "IAM Identity Center API access, for users of an OpenSearch UI application with Identity Center turned on: the domain sees them by subject_key (UserName, UserId or Email) with their Identity Center groups as backend roles (roles_key GroupName or GroupId). Requires fine-grained access control and an Identity Center instance in the domain's region. Defaults to null: the block is not sent, and the provider then turns API access off, including on a domain where it was turned on outside Terraform. Set this to keep it on"
+  type = object({
+    enabled_api_access           = optional(bool, true)
+    identity_center_instance_arn = string
+    roles_key                    = optional(string, "GroupId")
+    subject_key                  = optional(string, "UserId")
+  })
+  default = null
+
+  validation {
+    condition     = var.identity_center_options == null || contains(["GroupName", "GroupId"], try(var.identity_center_options.roles_key, ""))
+    error_message = "identity_center_options.roles_key must be GroupName or GroupId."
+  }
+
+  validation {
+    condition     = var.identity_center_options == null || contains(["UserName", "UserId", "Email"], try(var.identity_center_options.subject_key, ""))
+    error_message = "identity_center_options.subject_key must be UserName, UserId or Email."
+  }
+}

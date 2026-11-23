@@ -165,6 +165,15 @@ resource "aws_opensearch_domain" "this" {
   }
 
   tags = var.tags
+
+  lifecycle {
+    # AWS rejects Identity Center API access without fine-grained access
+    # control only at apply, so fail at plan instead
+    precondition {
+      condition     = var.identity_center_options == null || !try(var.identity_center_options.enabled_api_access, true) || var.advanced_security_options_enabled
+      error_message = "identity_center_options with enabled_api_access requires advanced_security_options_enabled = true (fine-grained access control)."
+    }
+  }
 }
 
 resource "aws_opensearch_domain_policy" "this" {

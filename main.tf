@@ -81,6 +81,17 @@ resource "aws_opensearch_domain" "this" {
     }
   }
 
+  dynamic "identity_center_options" {
+    for_each = var.identity_center_options == null ? [] : [var.identity_center_options]
+
+    content {
+      enabled_api_access           = identity_center_options.value.enabled_api_access
+      identity_center_instance_arn = identity_center_options.value.identity_center_instance_arn
+      roles_key                    = identity_center_options.value.roles_key
+      subject_key                  = identity_center_options.value.subject_key
+    }
+  }
+
   domain_endpoint_options {
     enforce_https       = true
     tls_security_policy = "Policy-Min-TLS-1-2-2019-07"

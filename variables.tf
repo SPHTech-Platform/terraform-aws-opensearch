@@ -480,7 +480,7 @@ variable "multi_az_with_standby_enabled" {
 }
 
 variable "identity_center_options" {
-  description = "IAM Identity Center API access, for users of an OpenSearch UI application with Identity Center turned on: the domain sees them by subject_key (UserName, UserId or Email) with their Identity Center groups as backend roles (roles_key GroupName or GroupId). Requires fine-grained access control and an Identity Center instance in the domain's region. Null leaves it off, which turns it off on a domain where it was turned on outside Terraform"
+  description = "IAM Identity Center API access, for users of an OpenSearch UI application with Identity Center turned on: the domain sees them by subject_key (UserName, UserId or Email) with their Identity Center groups as backend roles (roles_key GroupName or GroupId). Requires fine-grained access control and an Identity Center instance in the domain's region. Defaults to null: the block is not sent, and the provider then turns API access off, including on a domain where it was turned on outside Terraform. Set this to keep it on"
   type = object({
     enabled_api_access           = optional(bool, true)
     identity_center_instance_arn = string
